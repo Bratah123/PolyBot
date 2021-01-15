@@ -16,23 +16,24 @@ class Commands(commands.Cog, name="commands"):
         # language from -> to
         # !translate <from> <to> <message>
         if len(args) < 3:
-            ctx.send("Please provide all necessary arguments. !translate <from> <to> <message>")
+            await ctx.send("Please provide all necessary arguments. !translate <from> <to> <message>")
             return
 
         lang_from = args[1]
         lang_to = args[2]
-        message = args[2:]
+
+        message_list = args[3:]
+        message = ""
+
+        for word in message_list:
+            message += word + " "
 
         translator = Translator(from_lang=lang_from, to_lang=lang_to)
+        await ctx.send("Translating message please give me a moment...")
 
-        try:
-            translation = translator.translate(message)
-        except Exception as e:
-            await ctx.send("That is an invalid language to translate")
-            print(e)
-            return
+        translation = translator.translate(message)
 
-        await ctx.send("Translation:", translation)
+        await ctx.send("Translation: " + translation)
 
 
 def setup(bot):

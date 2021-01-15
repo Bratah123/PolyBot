@@ -2,7 +2,7 @@ from decimal import Decimal
 
 from discord.ext import commands
 from translate import Translator
-from forex_python.converter import CurrencyRates
+from forex_python.converter import CurrencyRates, CurrencyCodes
 
 
 class Commands(commands.Cog, name="commands"):
@@ -89,6 +89,8 @@ class Commands(commands.Cog, name="commands"):
             return
 
         c = CurrencyRates()
+        s = CurrencyCodes()
+
         try:
             converted_amount = round(c.convert(currency_from, currency_to, amount), 2)
         except Exception as e:
@@ -96,7 +98,7 @@ class Commands(commands.Cog, name="commands"):
             await ctx.send("Please provide a valid currency code (I.E. USD, SGD, CAD)")
             return
 
-        await ctx.send(f"{currency_from} to {currency_to}: {converted_amount} {currency_to}")
+        await ctx.send(f"{currency_from} to {currency_to}: {s.get_symbol(currency_to)}{converted_amount}")
 
 
 def setup(bot):

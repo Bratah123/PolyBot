@@ -10,6 +10,7 @@ bot.remove_command('help')
 
 # load the class in "commands.py"
 bot.load_extension("commands")
+print("Finished loading commands!")
 
 
 @bot.event
@@ -17,7 +18,7 @@ async def on_ready():
     print("Bot is now online!")  # Print this when the bot is online
 
 
-@bot.commands(name='help', pass_context=True)  # Here is our own help command we add
+@bot.command(name='help', pass_context=True)  # Here is our own help command we add
 async def help_command(ctx):
     command_cog = bot.get_cog("commands")
 
@@ -38,8 +39,9 @@ async def help_command(ctx):
     embed_msg.add_field(name="User Commands", value=cmd_list_str, inline=False)
     embed_msg.set_footer(text="PolyBot")
 
-    ctx.send(embed=embed_msg)
+    await ctx.send(embed=embed_msg)
 
 
 if __name__ == '__main__':
+    print("Loading Bot..")
     bot.run("TOKEN HERE")

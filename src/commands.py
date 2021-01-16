@@ -52,7 +52,7 @@ class Commands(commands.Cog, name="commands"):
             await ctx.send("That is not a valid decimal number.")
             return
 
-        await ctx.send(f"Hexadecimal: {number}")
+        await ctx.send(f"Hexadecimal: {str(number).upper()}")
 
     @commands.command(name="todec", pass_context=True)
     async def to_dec(self, ctx):

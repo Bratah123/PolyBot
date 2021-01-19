@@ -149,6 +149,28 @@ class Commands(commands.Cog, name="commands"):
 
         await ctx.send(embed=embed)
 
+    @commands.command(name="coinflip")
+    async def coin_flip(self, ctx):
+        heads_or_tails = random.randint(1, 2)
+        text = ""
+        if heads_or_tails == 1:
+            # heads
+            text = "Heads"
+            pic = "https://media.discordapp.net/attachments/631249406775132182/801205446115065926/fMemdeFmPeYAAAAAASUVORK5CYII.png"
+        else:
+            # tails
+            text = "Tails"
+            pic = "https://cdn.discordapp.com/attachments/631249406775132182/801205566877728798/Y5vgPrzC7Iazmd78B6LVfyzD7HfwBKvIh3eeptpAAAAABJRU5ErkJggg.png"
+
+        embed = discord.Embed(
+            title="Coin Flip",
+            description=text,
+            color=0x00FF00,
+        )
+        embed.set_image(url=pic)
+        embed.set_footer(text="PolyBot")
+        await ctx.send(embed=embed)
+
 
 def setup(bot):
     bot.add_cog(Commands(bot))

@@ -1,8 +1,10 @@
 from decimal import Decimal
 
+import discord
 from discord.ext import commands
 from translate import Translator
 from forex_python.converter import CurrencyRates, CurrencyCodes
+import random
 
 
 class Commands(commands.Cog, name="commands"):
@@ -11,6 +13,28 @@ class Commands(commands.Cog, name="commands"):
 
     def __init__(self, bot):
         self.bot = bot
+        self.eight_ball_responses = (
+            'It is certain.',
+            'It is decidedly so.',
+            'Without a doubt',
+            'Yes - definitely',
+            'You may rely on it.',
+            'As I see it, yes.',
+            'Most likely.',
+            'Outlook good.',
+            'Yes',
+            'Signs point to yes.',
+            'Reply hazy, try again.',
+            'Ask again later.',
+            'Better not tell you now.',
+            'Cannot predict now.',
+            'Concentrate and ask again.',
+            'Don\'t count on it.',
+            'My reply is no.',
+            'My sources say no.',
+            'Outlook not so good.',
+            'Very doubtful.',
+        )
 
     @commands.command(name="translate", pass_context=True)
     async def translate(self, ctx):
@@ -99,6 +123,31 @@ class Commands(commands.Cog, name="commands"):
             return
 
         await ctx.send(f"{currency_from} to {currency_to}: {s.get_symbol(currency_to)}{converted_amount}")
+
+    @commands.command(name="8ball", pass_context=True)
+    async def eight_ball(self, ctx):
+        args = ctx.message.content.split(" ")
+        if len(args) < 3:
+            await ctx.send("What are you asking, please provide a longer question.")
+            return
+
+        random_num = random.randrange(0, len(self.eight_ball_responses) - 1)
+        color = 0x00FF00  # Defaults to green
+
+        if 9 < random_num < 14:
+            color = 0xFFFF00
+        elif 15 <= random_num < 19:
+            color = 0xFF0000
+
+        embed = discord.Embed(
+            title="Eight Ball",
+            color=color
+        ).add_field(name="Output",
+                    value=f"```{self.eight_ball_responses[random_num]}```")
+
+        embed.set_footer(text="PolyBot")
+
+        await ctx.send(embed=embed)
 
 
 def setup(bot):

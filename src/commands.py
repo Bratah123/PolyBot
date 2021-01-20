@@ -225,6 +225,30 @@ class Commands(commands.Cog, name="commands"):
         embed.add_field(name="Output", value=f"```py\nYou rolled {dice[number]}```")
         await ctx.send(embed=embed)
 
+    @commands.command(name="roll")
+    async def roll(self, ctx):
+        args = ctx.message.content.split(" ")
+        if len(args) < 3:
+            await ctx.send("Please provide all necessary arguments. !roll <number> <number2>")
+            return
+        try:
+            number_one = int(args[1])
+            number_two = int(args[2])
+            if number_one > number_two:
+                await ctx.send("The first given number must be lower than the second number.")
+                return
+        except ValueError:
+            await ctx.send("Please use numbers.")
+            return
+        number = random.randint(number_one, number_two)
+        embed = discord.Embed(
+            title="Roll",
+            color=0x00FFFF,
+        )
+        embed.set_footer(text="PolyBot")
+        embed.add_field(name="Output", value=f"```py\nYou rolled {number}```")
+        await ctx.send(embed=embed)
+
 
 def setup(bot):
     bot.add_cog(Commands(bot))

@@ -10,6 +10,7 @@ Poly bot aims to allow users in a discord server to convert any values into a de
 - Translations
 - Eight ball
 - Coin Flip
+- Dice roll
 
 ## Gallery
 ![gallery](https://media.discordapp.net/attachments/631249406775132182/799770724591468604/3443bba7bace8052f9f17eeabf15d653.png)

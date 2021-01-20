@@ -78,11 +78,11 @@ class Commands(commands.Cog, name="commands"):
 
         await ctx.send(f"Hexadecimal: 0x{str(number)[2:].upper()}")
 
-    @commands.command(name="todec", pass_context=True)
+    @commands.command(name="fromhex", pass_context=True)
     async def to_dec(self, ctx):
         args = ctx.message.content.split(" ")
         if len(args) < 2:
-            await ctx.send("Please provide all necessary arguments. !todec <hex_number>")
+            await ctx.send("Please provide all necessary arguments. !fromhex <hex_number>")
             return
 
         try:
@@ -170,6 +170,38 @@ class Commands(commands.Cog, name="commands"):
         embed.set_image(url=pic)
         embed.set_footer(text="PolyBot")
         await ctx.send(embed=embed)
+
+    @commands.command(name="tobinary", pass_context=True)
+    async def to_binary(self, ctx):
+        args = ctx.message.content.split(" ")
+        if len(args) < 2:
+            await ctx.send("Please provide all necessary arguments. !tobinary <number>")
+            return
+
+        try:
+            num = int(args[1])
+        except Exception as e:
+            print(e)
+            await ctx.send(e)
+            return
+
+        await ctx.send(f"Binary: {bin(num).replace('0b', '')}")
+
+    @commands.command(name="frombinary", pass_context=True)
+    async def from_binary(self, ctx):
+        args = ctx.message.content.split(" ")
+        if len(args) < 2:
+            await ctx.send("Please provide all necessary arguments. !frombinary <number>")
+            return
+
+        try:
+            num = int(args[1], 2)
+        except Exception as e:
+            print(e)
+            await ctx.send(e)
+            return
+
+        await ctx.send(f"Decimal: {num}")
 
 
 def setup(bot):

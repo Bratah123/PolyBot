@@ -35,6 +35,14 @@ class Commands(commands.Cog, name="commands"):
             'Outlook not so good.',
             'Very doubtful.',
         )
+        self.dice_images = (
+            "https://cdn.discordapp.com/attachments/731528944402300977/801529918630002688/dice-six-faces-one.png",
+            "https://cdn.discordapp.com/attachments/731528944402300977/801529934744256612/dice-six-faces-two.png",
+            "https://cdn.discordapp.com/attachments/731528944402300977/801529945243123712/dice-six-faces-three.png",
+            "https://cdn.discordapp.com/attachments/731528944402300977/801529959863549962/dice-six-faces-four.png",
+            "https://cdn.discordapp.com/attachments/731528944402300977/801529976372985866/dice-six-faces-five.png",
+            "https://cdn.discordapp.com/attachments/731528944402300977/801529992144093194/dice-six-faces-six.png"
+        )
 
     @commands.command(name="translate", pass_context=True)
     async def translate(self, ctx):
@@ -202,6 +210,20 @@ class Commands(commands.Cog, name="commands"):
             return
 
         await ctx.send(f"Decimal: {num}")
+
+    @commands.command(name="diceroll")
+    async def dice_roll(self, ctx):
+        dice = [1, 2, 3, 4, 5, 6]
+        number = random.randint(0, 5)
+        image = self.dice_images[number]
+        embed = discord.Embed(
+            title="Dice roll",
+            color=0x00FFFF,
+        )
+        embed.set_footer(text="PolyBot")
+        embed.set_image(url=image)
+        embed.add_field(name="Output", value=f"```py\nYou rolled {dice[number]}```")
+        await ctx.send(embed=embed)
 
 
 def setup(bot):

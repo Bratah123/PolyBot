@@ -6,6 +6,7 @@ Poly bot aims to allow users in a discord server to convert any values into a de
 ## Features
 - Currency Conversion
 - Hexadecimal Conversion
+- Binary Conversion
 - Translations
 - Eight ball
 - Coin Flip

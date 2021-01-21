@@ -8,7 +8,6 @@ from translate import Translator
 from forex_python.converter import CurrencyRates, CurrencyCodes
 
 
-
 class Commands(commands.Cog, name="commands"):
     """Cog class that handle ALL the commands
     """
@@ -258,7 +257,7 @@ class Commands(commands.Cog, name="commands"):
             await ctx.send("Please provide all necessary arguments. !toascii <binary string>")
             return
         bin_string = " ".join(args[1:])
-        ascii_string = binascii.b2a_uu(bin_string)
+        ascii_string = binascii.b2a_uu(bin_string.encode())
         await ctx.send(f"ASCII: {ascii_string}")
 
     @commands.command(name="fromascii", pass_context=True)
@@ -268,8 +267,9 @@ class Commands(commands.Cog, name="commands"):
             await ctx.send("Please provide all necessary arguments. !fromascii <ASCII string>")
             return
         ascii_string = " ".join(args[1:])
-        bin_string = binascii.a2b_uu(ascii_string)
+        bin_string = binascii.a2b_uu(ascii_string.encode())
         await ctx.send(f"Binary: {bin_string}")
+
 
 def setup(bot):
     bot.add_cog(Commands(bot))

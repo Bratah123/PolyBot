@@ -1,5 +1,4 @@
 import random
-import binascii
 from decimal import Decimal
 
 import discord
@@ -257,9 +256,11 @@ class Commands(commands.Cog, name="commands"):
         if len(args) < 2:
             await ctx.send("Please provide all necessary arguments. !toascii <binary string>")
             return
-        bin_string = " ".join(args[1:])
-        ascii_string = binascii.b2a_uu(bin_string)
-        await ctx.send(f"ASCII: {ascii_string}")
+        bin_list = args[1:]  # remove command part
+        ascii_data = ""  # initialise
+        for element in bin_list:  # use int to read as base 2
+            ascii_data = ascii_data + chr(int(element, 2))  # chr to get ASCII
+        await ctx.send(f"ASCII: {ascii_data}")
 
     @commands.command(name="fromascii", pass_context=True)
     async def bin_from_ascii(self, ctx):
@@ -268,8 +269,13 @@ class Commands(commands.Cog, name="commands"):
             await ctx.send("Please provide all necessary arguments. !fromascii <ASCII string>")
             return
         ascii_string = " ".join(args[1:])
-        bin_string = binascii.a2b_uu(ascii_string)
-        await ctx.send(f"Binary: {bin_string}")
+        #
+        new_bin = ''.join(format(i, 'b') for i in bytearray(ascii_string, encoding='utf-8'))
+        bin_list = []  # initialise
+        for i in range(0, len(new_bin), 7):
+            bin_list.append(new_bin[i:i + 7])  # format into 7 digit chunks
+        new_bin = " ".join(bin_list)  # add spaces
+        await ctx.send(f"Binary: {new_bin}")
 
 def setup(bot):
     bot.add_cog(Commands(bot))

@@ -7,7 +7,6 @@ from translate import Translator
 from forex_python.converter import CurrencyRates, CurrencyCodes
 
 
-
 class Commands(commands.Cog, name="commands"):
     """Cog class that handle ALL the commands
     """
@@ -269,13 +268,13 @@ class Commands(commands.Cog, name="commands"):
             await ctx.send("Please provide all necessary arguments. !fromascii <ASCII string>")
             return
         ascii_string = " ".join(args[1:])
-        #
         new_bin = ''.join(format(i, 'b') for i in bytearray(ascii_string, encoding='utf-8'))
         bin_list = []  # initialise
         for i in range(0, len(new_bin), 7):
             bin_list.append(new_bin[i:i + 7])  # format into 7 digit chunks
         new_bin = " ".join(bin_list)  # add spaces
         await ctx.send(f"Binary: {new_bin}")
+
 
 def setup(bot):
     bot.add_cog(Commands(bot))

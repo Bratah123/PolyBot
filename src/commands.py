@@ -1,10 +1,12 @@
+import random
+import binascii
 from decimal import Decimal
 
 import discord
 from discord.ext import commands
 from translate import Translator
 from forex_python.converter import CurrencyRates, CurrencyCodes
-import random
+
 
 
 class Commands(commands.Cog, name="commands"):
@@ -249,6 +251,25 @@ class Commands(commands.Cog, name="commands"):
         embed.add_field(name="Output", value=f"```py\nYou rolled {number}```")
         await ctx.send(embed=embed)
 
+    @commands.command(name="toascii", pass_context=True)
+    async def bin_to_ascii(self, ctx):
+        args = ctx.message.content.split(" ")
+        if len(args) < 2:
+            await ctx.send("Please provide all necessary arguments. !toascii <binary string>")
+            return
+        bin_string = " ".join(args[1:])
+        ascii_string = binascii.b2a_uu(bin_string)
+        await ctx.send(f"ASCII: {ascii_string}")
+
+    @commands.command(name="fromascii", pass_context=True)
+    async def bin_from_ascii(self, ctx):
+        args = ctx.message.content.split(" ")
+        if len(args) < 2:
+            await ctx.send("Please provide all necessary arguments. !fromascii <ASCII string>")
+            return
+        ascii_string = " ".join(args[1:])
+        bin_string = binascii.a2b_uu(ascii_string)
+        await ctx.send(f"Binary: {bin_string}")
 
 def setup(bot):
     bot.add_cog(Commands(bot))

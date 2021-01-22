@@ -257,8 +257,8 @@ class Commands(commands.Cog, name="commands"):
             return
         bin_list = args[1:]  # remove command part
         ascii_data = ""  # initialise
-        for element in bin_list:  # use int to read as base 2
-            ascii_data = ascii_data + chr(int(element, 2))  # chr to get ASCII
+        for element in bin_list:  # use int() to read as base 2:
+            ascii_data = ascii_data + chr(int(element, 2))  # (chr) cast to String for concat
         await ctx.send(f"ASCII: {ascii_data}")
 
     @commands.command(name="fromascii", pass_context=True)
@@ -267,13 +267,15 @@ class Commands(commands.Cog, name="commands"):
         if len(args) < 2:
             await ctx.send("Please provide all necessary arguments. !fromascii <ASCII string>")
             return
-        ascii_string = " ".join(args[1:])
-        new_bin = ''.join(format(i, 'b') for i in bytearray(ascii_string, encoding='utf-8'))
+        ascii_string = " ".join(args[1:])  # remove command part
+        # Use bytearray() to convert to binary value
+        # Then use format() to pad the front with 0s to make up to 7
+        bin_string = "".join("{:0>7b}".format(i) for i in bytearray(ascii_string, encoding='utf-8'))
         bin_list = []  # initialise
-        for i in range(0, len(new_bin), 7):
-            bin_list.append(new_bin[i:i + 7])  # format into 7 digit chunks
-        new_bin = " ".join(bin_list)  # add spaces
-        await ctx.send(f"Binary: {new_bin}")
+        for i in range(0, len(bin_string), 7):
+            bin_list.append(bin_string[i:i + 7])  # format into 7 digit chunks
+        bin_string = " ".join(bin_list)  # add spaces
+        await ctx.send(f"Binary: {bin_string}")
 
 
 def setup(bot):

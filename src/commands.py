@@ -6,6 +6,8 @@ from discord.ext import commands
 from translate import Translator
 from forex_python.converter import CurrencyRates, CurrencyCodes
 
+import utility
+
 
 class Commands(commands.Cog, name="commands"):
     """Cog class that handle ALL the commands
@@ -251,6 +253,7 @@ class Commands(commands.Cog, name="commands"):
 
     @commands.command(name="toascii", pass_context=True)
     async def bin_to_ascii(self, ctx):
+        # @author KOOKIIE
         args = ctx.message.content.split(" ")
         if len(args) < 2:
             await ctx.send("Please provide all necessary arguments. !toascii <binary string>")
@@ -263,6 +266,7 @@ class Commands(commands.Cog, name="commands"):
 
     @commands.command(name="fromascii", pass_context=True)
     async def bin_from_ascii(self, ctx):
+        # @author KOOKIIE
         args = ctx.message.content.split(" ")
         if len(args) < 2:
             await ctx.send("Please provide all necessary arguments. !fromascii <ASCII string>")
@@ -276,6 +280,215 @@ class Commands(commands.Cog, name="commands"):
             bin_list.append(bin_string[i:i + 7])  # format into 7 digit chunks
         bin_string = " ".join(bin_list)  # add spaces
         await ctx.send(f"Binary: {bin_string}")
+
+    @commands.command(name="length", pass_context=True)
+    async def length_conversion(self, ctx):
+        # @author KOOKIIE
+        args = ctx.message.content.split(" ")
+        if len(args) < 4:
+            await ctx.send("Please provide all necessary arguments. !length <from> <to> <value>")
+            return
+        # Takes in args like km, m, cm, mi, ft, in
+        unit_from = args[1].lower()
+        unit_to = args[2].lower()
+        source_value = int(args[3])
+
+        # SI to Imperial
+        if unit_from in utility.SI_UNITS:  # do conversions as km-mi
+            source_in_km = utility.to_km(source_value, unit_from)
+            source_in_mi = source_in_km * 0.621371192
+            if unit_to == "mi":
+                output = source_in_mi
+                await ctx.send(f"{source_value}{unit_from} = {output}{unit_to}")
+                return
+            elif unit_to == "ft":
+                output_ft_component = source_in_mi * 5280
+                if not int(output_ft_component):
+                    # if ft component < 1
+                    await ctx.send(f"{source_value}{unit_from} = {source_in_mi * 5280}{unit_to}")
+                    return
+                else:
+                    output_in_component = (output_ft_component - int(output_ft_component)) * 12
+                    await ctx.send(f"{source_value}{unit_from} = {int(output_ft_component)}{unit_to} {output_in_component}in")
+                    return
+            elif unit_to == "in":
+                output = source_in_mi * 63360
+                await ctx.send(f"{source_value}{unit_from} = {output}{unit_to}")
+                return
+            else:
+                await ctx.send("Invalid units!")
+                return
+
+        # Imperial to SI
+        if unit_from in utility.IMPERIAL_UNITS:  # do conversions as km-mi
+            source_in_mi = utility.to_mi(source_value, unit_from)
+            source_in_km = source_in_mi / 0.621371192
+            if unit_to == "km":
+                output = source_in_km
+                await ctx.send(f"{source_value}{unit_from} = {output}{unit_to}")
+                return
+            elif unit_to == "m":
+                output_m_component = source_in_km * 1000
+                if not int(output_m_component):
+                    # if m component < 1
+                    await ctx.send(f"{source_value}{unit_from} = {output_m_component}{unit_to}")
+                    return
+                else:
+                    output_cm_component = (output_m_component - int(output_m_component)) * 100
+                    await ctx.send(f"{source_value}{unit_from} = {int(output_m_component)}{unit_to} {output_cm_component}cm")
+                    return
+            elif unit_to == "cm":
+                output_cm_component = source_in_km * 100000
+                if not int(output_cm_component):
+                    # if cm component < 1
+                    await ctx.send(f"{source_value}{unit_from} = {output_cm_component}{unit_to}")
+                    return
+                else:
+                    output_mm_component = (output_cm_component - int(output_cm_component)) * 10
+                    await ctx.send(f"{source_value}{unit_from} = {int(output_cm_component)}{unit_to} {output_mm_component}cm")
+                    return
+            elif unit_to == "mm":
+                output = source_in_km * 1000000
+                await ctx.send(f"{source_value}{unit_from} = {output}{unit_to}")
+                return
+            else:
+                await ctx.send("Invalid units!")
+                return
+        # Sanity-check:
+        await  ctx.send("Invalid units!")
+
+    @commands.command(name="weight", pass_context=True)
+    async def weight_conversion(self, ctx):
+        # @author KOOKIIE
+        args = ctx.message.content.split(" ")
+        if len(args) < 4:
+            await ctx.send("Please provide all necessary arguments. !weight <from> <to> <value>")
+            return
+        # Takes in args like kg, g, lbs, oz
+        unit_from = args[1].lower()
+        unit_to = args[2].lower()
+        source_value = int(args[3])
+
+        # SI to Imperial
+        if unit_from in utility.SI_UNITS:  # do conversions as kg-lbs
+            source_in_kg = utility.to_kg(source_value, unit_from)
+            source_in_lbs = source_in_kg / 0.45359237
+            if unit_to == "lbs":
+                output = source_in_lbs
+                await ctx.send(f"{source_value}{unit_from} = {output}{unit_to}")
+                return
+            elif unit_to == "oz":
+                output = source_in_lbs * 16
+                await ctx.send(f"{source_value}{unit_from} = {output}{unit_to}")
+                return
+            else:
+                await ctx.send("Invalid units!")
+                return
+
+        # Imperial to SI
+        if unit_from in utility.IMPERIAL_UNITS:  # do conversions as km-mi
+            source_in_lbs = utility.to_lbs(source_value, unit_from)
+            source_in_kg = source_in_lbs * 0.45359237
+            if unit_to == "kg":
+                output = source_in_kg
+                await ctx.send(f"{source_value}{unit_from} = {output}{unit_to}")
+                return
+            elif unit_to == "g":
+                output = source_in_kg * 1000
+                await ctx.send(f"{source_value}{unit_from} = {output}{unit_to}")
+                return
+            else:
+                await ctx.send("Invalid units!")
+                return
+        # Sanity-check:
+        await ctx.send("Invalid units!")
+
+    @commands.command(name="liquid", pass_context=True)
+    async def liquid_conversion(self, ctx):
+        # @author KOOKIIE
+        args = ctx.message.content.split(" ")
+        if len(args) < 4:
+            await ctx.send("Please provide all necessary arguments. !liquid <from> <to> <value>")
+            return
+        # Takes in args like ml, l, oz, pint, gallon
+        unit_from = args[1].lower()
+        unit_to = args[2].lower()
+        source_value = int(args[3])
+
+        # SI to Imperial
+        if unit_from in utility.SI_UNITS:  # do conversions as ml-oz
+            source_in_ml = utility.to_ml(source_value, unit_from)
+            source_in_oz = source_in_ml / 29.57
+            if unit_to == "oz":
+                output = source_in_oz
+                await ctx.send(f"{source_value}{unit_from} = {output}{unit_to}")
+                return
+            elif unit_to == "pint":
+                output = source_in_oz / 16
+                await ctx.send(f"{source_value}{unit_from} = {output}{unit_to}")
+                return
+            elif unit_to == "gallon":
+                output = source_in_oz / 128
+                await ctx.send(f"{source_value}{unit_from} = {output}{unit_to}")
+                return
+            else:
+                await ctx.send("Invalid units!")
+                return
+
+        # Imperial to SI
+        if unit_from in utility.IMPERIAL_UNITS:
+            source_in_oz = utility.to_oz(source_value, unit_from)
+            source_in_ml = source_in_oz * 0.45359237
+            if unit_to in ("ml", "cc"):
+                output = source_in_ml
+                await ctx.send(f"{source_value}{unit_from} = {output}{unit_to}")
+                return
+            elif unit_to == "l":
+                output = source_in_ml / 1000
+                await ctx.send(f"{source_value}{unit_from} = {output}{unit_to}")
+                return
+            else:
+                await ctx.send("Invalid units!")
+                return
+        # Sanity-check:
+        await ctx.send("Invalid units!")
+
+    @commands.command(name="temp", pass_context=True)
+    async def temp_conversion(self, ctx):
+        # @author KOOKIIE
+        args = ctx.message.content.split(" ")
+        if len(args) < 4:
+            await ctx.send("Please provide all necessary arguments. !temp <from> <to> <value>")
+            return
+        # Takes in args like c, f, k
+        unit_from = args[1].lower()
+        unit_to = args[2].lower()
+        source_value = int(args[3])
+
+        # 3P2 = 6 possible permutations
+        if unit_from == "c" and unit_to == "k":
+            output = utility.c_to_k(source_value)
+            await ctx.send(f"{source_value}{unit_from} = {output}{unit_to}")
+        elif unit_from == "k" and unit_to == "c":
+            output = utility.k_to_c(source_value)
+            await ctx.send(f"{source_value}{unit_from} = {output}{unit_to}")
+        elif unit_from == "f" and unit_to == "k":
+            output = utility.f_to_k(source_value)
+            await ctx.send(f"{source_value}{unit_from} = {output}{unit_to}")
+        elif unit_from == "k" and unit_to == "f":
+            output = utility.k_to_f(source_value)
+            await ctx.send(f"{source_value}{unit_from} = {output}{unit_to}")
+        elif unit_from == "f" and unit_to == "c":
+            output = utility.f_to_k(source_value)
+            output = utility.k_to_c(output)
+            await ctx.send(f"{source_value}{unit_from} = {output}{unit_to}")
+        elif unit_from == "c" and unit_to == "f":
+            output = utility.c_to_k(source_value)
+            output = utility.k_to_f(output)
+            await ctx.send(f"{source_value}{unit_from} = {output}{unit_to}")
+        else:
+            # Sanity-check:
+            await ctx.send("Invalid units!")
 
 
 def setup(bot):

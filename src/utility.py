@@ -9,7 +9,7 @@ def to_km(value, unit):
     elif unit == "m":
         return value / 1000
     elif unit == "km":
-        return
+        return value
     else:
         raise ValueError(f"Invalid unit: {unit}")
 

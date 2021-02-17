@@ -8,7 +8,7 @@ Python -m venv %~dp0venv
 
 echo Installing dependencies...
 rem Activate the VENV
-call test\scripts\activate.bat
+call venv\scripts\activate.bat
 
 rem Install requirements
 pip install wheel

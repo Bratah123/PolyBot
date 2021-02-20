@@ -438,7 +438,7 @@ class Commands(commands.Cog, name="commands"):
         # Imperial to SI
         if unit_from in utility.IMPERIAL_UNITS:
             source_in_oz = utility.to_oz(source_value, unit_from)
-            source_in_ml = source_in_oz * 0.45359237
+            source_in_ml = source_in_oz * 29.57
             if unit_to in ("ml", "cc"):
                 output = source_in_ml
                 await ctx.send(f"{source_value}{unit_from} = {output:.2f}{unit_to} (2dp)")

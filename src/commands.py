@@ -46,7 +46,11 @@ class Commands(commands.Cog, name="commands"):
             "https://cdn.discordapp.com/attachments/731528944402300977/801529992144093194/dice-six-faces-six.png"
         )
 
-    @commands.command(name="translate", pass_context=True)
+    @commands.command(
+        name="translate",
+        pass_context=True,
+        brief="Translates messages between 2 different languages."
+    )
     async def translate(self, ctx):
         args = ctx.message.content.split(" ")
         # arguments we are looking for
@@ -72,7 +76,11 @@ class Commands(commands.Cog, name="commands"):
 
         await ctx.send("Translation: " + translation)
 
-    @commands.command(name="tohex", pass_context=True)
+    @commands.command(
+        name="tohex",
+        pass_context=True,
+        brief="Converts decimal numbers to hexadecimal."
+    )
     async def to_hex(self, ctx):
         args = ctx.message.content.split(" ")
         if len(args) < 2:
@@ -88,7 +96,11 @@ class Commands(commands.Cog, name="commands"):
 
         await ctx.send(f"Hexadecimal: 0x{str(number)[2:].upper()}")
 
-    @commands.command(name="fromhex", pass_context=True)
+    @commands.command(
+        name="fromhex",
+        pass_context=True,
+        brief="Converts hexadecimal numbers to decimal."
+    )
     async def to_dec(self, ctx):
         args = ctx.message.content.split(" ")
         if len(args) < 2:
@@ -104,7 +116,11 @@ class Commands(commands.Cog, name="commands"):
 
         await ctx.send(f"Decimal: {number}")
 
-    @commands.command(name="currency", pass_context=True)
+    @commands.command(
+        name="currency",
+        pass_context=True,
+        brief="Converts a monetary value between 2 real currencies. (Forex-based)"
+    )
     async def to_currency(self, ctx):
         args = ctx.message.content.split(" ")
         if len(args) < 4:
@@ -134,7 +150,11 @@ class Commands(commands.Cog, name="commands"):
 
         await ctx.send(f"{currency_from} to {currency_to}: {s.get_symbol(currency_to)}{converted_amount}")
 
-    @commands.command(name="8ball", pass_context=True)
+    @commands.command(
+        name="8ball",
+        pass_context=True,
+        brief="Answers a yes-no question; Mattel Magic 8-Ball simulator."
+    )
     async def eight_ball(self, ctx):
         args = ctx.message.content.split(" ")
         if len(args) < 3:
@@ -159,7 +179,10 @@ class Commands(commands.Cog, name="commands"):
 
         await ctx.send(embed=embed)
 
-    @commands.command(name="coinflip")
+    @commands.command(
+        name="coinflip",
+        brief="Coin-flip simulator."
+    )
     async def coin_flip(self, ctx):
         heads_or_tails = random.randint(1, 2)
         text = ""
@@ -181,7 +204,11 @@ class Commands(commands.Cog, name="commands"):
         embed.set_footer(text="PolyBot")
         await ctx.send(embed=embed)
 
-    @commands.command(name="tobinary", pass_context=True)
+    @commands.command(
+        name="tobinary",
+        pass_context=True,
+        brief="Converts decimal numbers to binary."
+    )
     async def to_binary(self, ctx):
         args = ctx.message.content.split(" ")
         if len(args) < 2:
@@ -197,7 +224,11 @@ class Commands(commands.Cog, name="commands"):
 
         await ctx.send(f"Binary: {bin(num).replace('0b', '')}")
 
-    @commands.command(name="frombinary", pass_context=True)
+    @commands.command(
+        name="frombinary",
+        pass_context=True,
+        brief="Converts binary numbers to decimal."
+    )
     async def from_binary(self, ctx):
         args = ctx.message.content.split(" ")
         if len(args) < 2:
@@ -213,7 +244,10 @@ class Commands(commands.Cog, name="commands"):
 
         await ctx.send(f"Decimal: {num}")
 
-    @commands.command(name="diceroll")
+    @commands.command(
+        name="diceroll",
+        brief="Dice-roll simulator."
+    )
     async def dice_roll(self, ctx):
         dice = [1, 2, 3, 4, 5, 6]
         number = random.randint(0, 5)
@@ -227,7 +261,10 @@ class Commands(commands.Cog, name="commands"):
         embed.add_field(name="Output", value=f"```py\nYou rolled {dice[number]}```")
         await ctx.send(embed=embed)
 
-    @commands.command(name="roll")
+    @commands.command(
+        name="roll",
+        brief="Pseudo-random number generator."
+    )
     async def roll(self, ctx):
         args = ctx.message.content.split(" ")
         if len(args) < 3:
@@ -251,7 +288,11 @@ class Commands(commands.Cog, name="commands"):
         embed.add_field(name="Output", value=f"```py\nYou rolled {number}```")
         await ctx.send(embed=embed)
 
-    @commands.command(name="toascii", pass_context=True)
+    @commands.command(
+        name="toascii",
+        pass_context=True,
+        brief="Converts binary representations to ASCII."
+    )
     async def bin_to_ascii(self, ctx):
         # @author KOOKIIE
         args = ctx.message.content.split(" ")
@@ -264,7 +305,11 @@ class Commands(commands.Cog, name="commands"):
             ascii_data = ascii_data + chr(int(element, 2))  # (chr) cast to String for concat
         await ctx.send(f"ASCII: {ascii_data}")
 
-    @commands.command(name="fromascii", pass_context=True)
+    @commands.command(
+        name="fromascii",
+        pass_context=True,
+        brief="Converts ASCII to binary representation."
+    )
     async def bin_from_ascii(self, ctx):
         # @author KOOKIIE
         args = ctx.message.content.split(" ")
@@ -281,12 +326,19 @@ class Commands(commands.Cog, name="commands"):
         bin_string = " ".join(bin_list)  # add spaces
         await ctx.send(f"Binary: {bin_string}")
 
-    @commands.command(name="length", pass_context=True)
+    @commands.command(
+        name="length",
+        pass_context=True,
+        brief="Converts between Imperial (U.S. customary) and SI length units. E.g. *km* to *mi*, or *ft* to *cm*."
+    )
     async def length_conversion(self, ctx):
         # @author KOOKIIE
         args = ctx.message.content.split(" ")
         if len(args) < 4:
-            await ctx.send("Please provide all necessary arguments. !length <from> <to> <value>")
+            await ctx.send(
+                "Please provide all necessary arguments. !length <from> <to> <value>\n"
+                "Valid units: km, m, cm, mi, ft, in"
+            )
             return
         # Takes in args like km, m, cm, mi, ft, in
         unit_from = args[1].lower()
@@ -357,12 +409,19 @@ class Commands(commands.Cog, name="commands"):
         # Sanity-check:
         await  ctx.send("Invalid units!")
 
-    @commands.command(name="weight", pass_context=True)
+    @commands.command(
+        name="weight",
+        pass_context=True,
+        brief="Converts between Imperial (U.S. customary) and SI mass units. E.g. *kg* to *lbs*, or *oz* to *g*."
+    )
     async def weight_conversion(self, ctx):
         # @author KOOKIIE
         args = ctx.message.content.split(" ")
         if len(args) < 4:
-            await ctx.send("Please provide all necessary arguments. !weight <from> <to> <value>")
+            await ctx.send(
+                "Please provide all necessary arguments. !weight <from> <to> <value>\n"
+                "Valid units: kg, g, lbs, oz"
+            )
             return
         # Takes in args like kg, g, lbs, oz
         unit_from = args[1].lower()
@@ -403,12 +462,23 @@ class Commands(commands.Cog, name="commands"):
         # Sanity-check:
         await ctx.send("Invalid units!")
 
-    @commands.command(name="liquid", pass_context=True)
+    @commands.command(
+        name="liquid",
+        pass_context=True,
+        brief=(
+                "Converts between Imperial (U.S. customary) and SI volume units. "
+                "E.g. *l* to *pint*, or *oz* to *l*.\n"
+                "Note: *oz* is understood as 'US fl oz' here"
+        )
+    )
     async def liquid_conversion(self, ctx):
         # @author KOOKIIE
         args = ctx.message.content.split(" ")
         if len(args) < 4:
-            await ctx.send("Please provide all necessary arguments. !liquid <from> <to> <value>")
+            await ctx.send(
+                "Please provide all necessary arguments. !liquid <from> <to> <value>\n"
+                "Valid units: ml, l, oz, pint, gallon"
+            )
             return
         # Takes in args like ml, l, oz, pint, gallon
         unit_from = args[1].lower()
@@ -450,45 +520,55 @@ class Commands(commands.Cog, name="commands"):
             else:
                 await ctx.send("Invalid units!")
                 return
+
         # Sanity-check:
         await ctx.send("Invalid units!")
 
-    @commands.command(name="temp", pass_context=True)
+    @commands.command(
+        name="temp",
+        pass_context=True,
+        brief=(
+                "Converts between various temperature units. "
+                "E.g. *F* to *C*, or *C* to *K*.\n"
+        )
+    )
     async def temp_conversion(self, ctx):
         # @author KOOKIIE
         args = ctx.message.content.split(" ")
         if len(args) < 4:
-            await ctx.send("Please provide all necessary arguments. !temp <from> <to> <value>")
+            await ctx.send(
+                "Please provide all necessary arguments. !temp <from> <to> <value>\n"
+                "Valid units: C, F, K"
+            )
             return
-        # Takes in args like c, f, k
-        unit_from = args[1].lower()
-        unit_to = args[2].lower()
+        # Takes in args like C, F, K
+        unit_from = args[1].upper()  # Catch for non-cap spellings
+        unit_to = args[2].upper()
         source_value = float(args[3])
+        output = 0
 
         # 3P2 = 6 possible permutations
-        if unit_from == "c" and unit_to == "k":
+        # Calls the appropriate converter from utility.py
+        if unit_from == "C" and unit_to == "K":
             output = utility.c_to_k(source_value)
-            await ctx.send(f"{source_value}*{unit_from}* = {output:.2f}*{unit_to}* (2dp)")
-        elif unit_from == "k" and unit_to == "c":
+        elif unit_from == "K" and unit_to == "C":
             output = utility.k_to_c(source_value)
-            await ctx.send(f"{source_value}*{unit_from}* = {output:.2f}*{unit_to}* (2dp)")
-        elif unit_from == "f" and unit_to == "k":
+        elif unit_from == "F" and unit_to == "K":
             output = utility.f_to_k(source_value)
-            await ctx.send(f"{source_value}*{unit_from}* = {output:.2f}*{unit_to}* (2dp)")
-        elif unit_from == "k" and unit_to == "f":
+        elif unit_from == "K" and unit_to == "F":
             output = utility.k_to_f(source_value)
-            await ctx.send(f"{source_value}*{unit_from}* = {output:.2f}*{unit_to}* (2dp)")
-        elif unit_from == "f" and unit_to == "c":
+        elif unit_from == "F" and unit_to == "C":
             output = utility.f_to_k(source_value)
             output = utility.k_to_c(output)
-            await ctx.send(f"{source_value}*{unit_from}* = {output:.2f}*{unit_to}* (2dp)")
-        elif unit_from == "c" and unit_to == "f":
+        elif unit_from == "C" and unit_to == "F":
             output = utility.c_to_k(source_value)
             output = utility.k_to_f(output)
-            await ctx.send(f"{source_value}*{unit_from}* = {output:.2f}*{unit_to}* (2dp)")
         else:
             # Sanity-check:
             await ctx.send("Invalid units!")
+            return  # short-circuit for invalid units
+
+        await ctx.send(f"{source_value}*{unit_from}* = {output:.2f}*{unit_to}* (2dp)")
 
 
 def setup(bot):

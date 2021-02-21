@@ -20,14 +20,34 @@ async def on_ready():
 
 @bot.command(name='help', pass_context=True)  # Here is our own help command we add
 async def help_command(ctx):
+    args = ctx.message.content.split(" ")
+    if len(args) > 2:  # Reject odd formats - Added by KOOKIIE
+        await ctx.send(
+            "The format of !help is either '!help' or '!help <command>'"
+        )
+
     command_cog = bot.get_cog("commands")
+    # Get list of command names & briefs (ordered pairs)
+    cmd_list = [command.name for command in command_cog.get_commands()]
+    brief_list = [command.brief for command in command_cog.get_commands()]
 
-    cmd_list = [command.name + "\n" for command in command_cog.get_commands()]
-    cmd_list_str = ""
+    # Give description of command - Added by KOOKIIE
+    # Check if it's of the format "!help <command>"
+    # short-circuits if there's 1 arg after "!help"
+    if len(args) == 2:
+        if args[1] in cmd_list:
+            await ctx.send(  # map name to brief:
+                f"**!{args[1]}**: {brief_list[cmd_list.index(args[1])]}"
+            )
+            # For "!help translate", it sends:
+            # !**Translate**: Translates messages between 2 different languages.
+            return
+        else:
+            await ctx.send(f"Could not find the command '{args[1]}'")
+            return
 
-    # Add every command into the string for the embed we are going to send
-    for cmd in cmd_list:
-        cmd_list_str += cmd
+    # Flatten command-name list to String, to add to embed
+    cmd_list_str = "\n".join(cmd_list)
 
     # Boiler plate embed message builder
     embed_msg = discord.Embed(
@@ -44,4 +64,4 @@ async def help_command(ctx):
 
 if __name__ == '__main__':
     print("Loading Bot..")
-    bot.run("TOKEN HERE")
+    bot.run("NzYxMTE2MTc2MjA5Njc0MjUw.X3V6rQ.pKqCoMVVtRqxDrvr31lM8UfdHU4")

@@ -64,4 +64,4 @@ async def help_command(ctx):
 
 if __name__ == '__main__':
     print("Loading Bot..")
-    bot.run("NzYxMTE2MTc2MjA5Njc0MjUw.X3V6rQ.pKqCoMVVtRqxDrvr31lM8UfdHU4")
+    bot.run("TOKEN HERE")

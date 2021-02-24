@@ -1,5 +1,7 @@
 import random
 from decimal import Decimal
+from datetime import datetime
+from dateutil import tz
 
 import discord
 from discord.ext import commands
@@ -569,6 +571,79 @@ class Commands(commands.Cog, name="commands"):
             return  # short-circuit for invalid units
 
         await ctx.send(f"{source_value}*{unit_from}* = {output:.2f}*{unit_to}* (2dp)")
+
+    @commands.command(
+        name="timestamp",
+        pass_context=True,
+        brief=(
+                "***NOTE: DEVELOPERS' TOOL!***\n"
+                "Gets a Discord message's timestamp (in the form: `Hour:Minute:Second Day/Month/Year`) "
+                "from a Discord snowflake ID.\n"
+                "Format: either `!timestamp <snowflake ID>` (defaults to Pacific Time) *or* "
+                "`!timestamp <Canonical Olson Database Name> <snowflake ID>`\n"
+                "Example: `!timestamp Asia/Seoul 814031888037445673`\n"
+                "*See here for full list of canonical names*: "
+                "https://github.com/Bratah123/PolyBot/blob/main/timezone_names.txt"
+        )
+    )
+    async def get_timestamp(self, ctx):
+        # @author KOOKIIE
+        args = ctx.message.content.split(" ")
+        if (len(args) < 2) or (len(args) > 3):
+            await ctx.send(
+                "Invalid format - too few/many arguments!\n"
+                "See `!help timestamp` for examples of valid inputs."
+            )
+            return
+
+        # Grab snowflake ID and timezone
+        canonical = ""
+        if len(args) == 2:
+            snowflake_literal = args[1]
+        else:
+            canonical += args[1]  # Prevent NPE
+            snowflake_literal = args[2]
+        # Sanity check:
+        try:
+            snowflake = int(snowflake_literal)  # filter junk input
+        except Exception as e:
+            print(f"Error encountered whilst casting snowflake ID to 'int':\n  {e}")
+            await ctx.send(
+                "Invalid arguments!\n"
+                "Discord Snowflake IDs should be numbers.\n"
+                "See `!help timestamp` for examples of valid inputs."
+            )
+            return
+
+        # process intermediates
+        # see: https://discord.com/developers/docs/reference#convert-snowflake-to-datetime
+        sec_since_epoch = utility.snowflake_to_unix(snowflake)
+        if not canonical:  # canonical empty (i.e. timezone not provided)
+            target_tz = tz.gettz("America/Los_Angeles")
+        else:
+            try:
+                target_tz = tz.gettz(canonical)
+            except Exception as e:
+                print(f"Error encountered whilst fetching tzinfo object:\n  {e}")
+                await ctx.send(
+                    "I'm afraid I couldn't parse your timezone!\n"
+                    "Please use this list of valid canonical names as reference: "
+                    "https://github.com/Bratah123/PolyBot/blob/main/timezone_names.txt"
+                )
+                return
+        discord_tz = tz.tzutc()
+        datetime_of_message = datetime.fromtimestamp(sec_since_epoch, discord_tz)
+        # datetime object is naive:
+        datetime_of_message = datetime_of_message
+        # convert to appropriate timezone, and format
+        try:
+            output = datetime_of_message.astimezone(target_tz).strftime("%H:%M:%S %d/%m/%Y")
+        except Exception as e:
+            print(f"Error encountered whilst formatting datetime object:\n  {e}")
+            await ctx.send("An unexpected error has occurred! Check logs for details!")
+            return
+
+        await ctx.send(f"The timestamp of the message you requested is: {output}")
 
 
 def setup(bot):

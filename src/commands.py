@@ -564,7 +564,7 @@ class Commands(commands.Cog, name="commands"):
         name="quote",
         pass_context=True,
         brief="Grabs a random message from the channel that a user typed.\nYou can also do `!quote sun "
-              "tzu` for sun tzu quotes (more to come).\n*Alternatively, you may use `!quote surprise me` to get "
+              "tzu` for Sun Tzu quotes (more to come).\n*Alternatively, you may use `!quote surprise me` to get "
               "a random quote from any author that PolyBot knows!*"
     )
     async def handle_quote(self, ctx):
@@ -572,7 +572,18 @@ class Commands(commands.Cog, name="commands"):
 
         # Check for quotes in library, if args provided
         if len(args) > 2:
-            person_to_quote = args[1].lower() + args[2].lower()
+            try:
+                if len(args) > 3:
+                    person_to_quote = args[1].lower() + args[2].lower()
+                else:
+                    person_to_quote = args[1].lower()  # Greek philosophers are known by single names
+            except:
+                await ctx.send(
+                    "Hmmm... This situation is most peculiar, "
+                    "but I'm afraid your input does not appear to be at all valid.\n"
+                    "May I humbly suggest checking `!help quote` for examples? :face_with_monocle: "
+                )
+                return
             if person_to_quote == "surpriseme":  # give random quote in library
                 await ctx.send(self.pick_quote_from_dict(random.choice(list(QUOTES_DICTIONARY.keys()))))
                 return
@@ -580,7 +591,7 @@ class Commands(commands.Cog, name="commands"):
                 await ctx.send(self.pick_quote_from_dict(person_to_quote))
                 return
             else:  # catch-all
-                await ctx.send(f"I'm so sorry, but I'm afraid I do not know of any quotes from such a person. :pensive:")
+                await ctx.send("I'm so sorry, but I'm afraid I do not know of any quotes from such a person. :pensive:")
                 return
 
         # Random messages from the channel, if no args provided

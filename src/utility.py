@@ -79,15 +79,6 @@ def k_to_f(value):
     return ((value - 273.15) * 1.8) + 32
 
 
-def snowflake_to_unix(snowflake):
-    snowflake_bin = bin(snowflake).replace('0b', '')  # 'str' type
-    ms_since_epoch_bin = snowflake_bin[:-22]  # strip trailing data
-    ms_since_epoch = int(ms_since_epoch_bin, 2)  # cast back to decimal
-    ms_since_epoch += 1420070400000  # add Discord Epoch UNIX timestamp
-    sec_since_epoch = ms_since_epoch / 1000
-    return sec_since_epoch
-
-
 SI_UNITS = [
     "km",
     "m",

@@ -576,6 +576,15 @@ class Commands(commands.Cog, name="commands"):
 
         await ctx.send(f"{source_value}*{unit_from}* = {output:.2f}*{unit_to}* (2dp)")
 
+    @staticmethod
+    def snowflake_to_unix(snowflake):
+        snowflake_bin = bin(snowflake).replace('0b', '')  # 'str' type
+        ms_since_epoch_bin = snowflake_bin[:-22]  # strip trailing data
+        ms_since_epoch = int(ms_since_epoch_bin, 2)  # cast back to decimal
+        ms_since_epoch += 1420070400000  # add Discord Epoch UNIX timestamp
+        sec_since_epoch = ms_since_epoch / 1000  # milliseconds to seconds
+        return sec_since_epoch
+
     @commands.command(
         name="timestamp",
         pass_context=True,
@@ -621,7 +630,7 @@ class Commands(commands.Cog, name="commands"):
 
         # process intermediates
         # see: https://discord.com/developers/docs/reference#convert-snowflake-to-datetime
-        sec_since_epoch = utility.snowflake_to_unix(snowflake)
+        sec_since_epoch = self.snowflake_to_unix(snowflake)
         if not canonical:  # canonical empty (i.e. timezone not provided)
             target_tz = tz.gettz("America/Los_Angeles")
         else:

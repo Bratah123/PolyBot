@@ -8,8 +8,8 @@ from discord.ext import commands
 from translate import Translator
 from forex_python.converter import CurrencyRates, CurrencyCodes
 
-import utility
-from constants import SUN_TZU_QUOTES, TOTAL_SUN_TZU_QUOTES, QUOTES_DICTIONARY
+import units
+from constants import QUOTES_DICTIONARY
 
 
 class Commands(commands.Cog, name="commands"):
@@ -349,71 +349,16 @@ class Commands(commands.Cog, name="commands"):
         source_value = float(args[3])
 
         # SI to Imperial
-        if unit_from in utility.SI_UNITS:  # do conversions as km-mi
-            source_in_km = utility.to_km(source_value, unit_from)
-            source_in_mi = source_in_km * 0.621371192
-            if unit_to == "mi":
-                output = source_in_mi
-                await ctx.send(f"{source_value}*{unit_from}* = {output:.2f}*{unit_to}* (2dp)")
-                return
-            elif unit_to == "ft":
-                output_ft_component = source_in_mi * 5280
-                if not int(output_ft_component):
-                    # if ft component < 1
-                    await ctx.send(f"{source_value}*{unit_from}* = {output_ft_component:.2f}*{unit_to}* (2dp)")
-                    return
-                else:
-                    output_in_component = (output_ft_component - int(output_ft_component)) * 12
-                    await ctx.send(
-                        f"{source_value}*{unit_from}* = {int(output_ft_component)}*{unit_to}* {output_in_component:.2f}*in* (2dp)")
-                    return
-            elif unit_to == "in":
-                output = source_in_mi * 63360
-                await ctx.send(f"{source_value}*{unit_from}* = {output:.2f}*{unit_to}* (2dp)")
-                return
-            else:
-                await ctx.send("Invalid units!")
-                return
+        if unit_from in units.SI_UNITS:
+            await ctx.send(units.length_si_to_imperial(unit_from, unit_to, source_value))
 
         # Imperial to SI
-        if unit_from in utility.IMPERIAL_UNITS:  # do conversions as km-mi
-            source_in_mi = utility.to_mi(source_value, unit_from)
-            source_in_km = source_in_mi / 0.621371192
-            if unit_to == "km":
-                output = source_in_km
-                await ctx.send(f"{source_value}*{unit_from}* = {output:.2f}*{unit_to}* (2dp)")
-                return
-            elif unit_to == "m":
-                output_m_component = source_in_km * 1000
-                if not int(output_m_component):
-                    # if m component < 1
-                    await ctx.send(f"{source_value}*{unit_from}* = {output_m_component:.2f}*{unit_to}* (2dp)")
-                    return
-                else:
-                    output_cm_component = (output_m_component - int(output_m_component)) * 100
-                    await ctx.send(
-                        f"{source_value}*{unit_from}* = {int(output_m_component)}*{unit_to}* {output_cm_component:.2f}*cm* (2dp)")
-                    return
-            elif unit_to == "cm":
-                output_cm_component = source_in_km * 100000
-                if not int(output_cm_component):
-                    # if cm component < 1
-                    await ctx.send(f"{source_value}*{unit_from}* = {output_cm_component:.2f}*{unit_to}* (2dp)")
-                    return
-                else:
-                    output_mm_component = (output_cm_component - int(output_cm_component)) * 10
-                    await ctx.send(
-                        f"{source_value}*{unit_from}* = {int(output_cm_component)}*{unit_to}* {output_mm_component:.2f}*cm* (2dp)")
-                    return
-            elif unit_to == "mm":
-                output = source_in_km * 1000000
-                await ctx.send(f"{source_value}*{unit_from}* = {output:.2f}*{unit_to}* (2dp)")
-                return
-            else:
-                await ctx.send("Invalid units!")
-                return
+        elif unit_from in units.IMPERIAL_UNITS:
+            await ctx.send(units.length_imperial_to_si(unit_from, unit_to, source_value))
+
         # Sanity-check:
-        await  ctx.send("Invalid units!")
+        else:
+            await ctx.send("Invalid units!")
 
     @commands.command(
         name="weight",
@@ -435,38 +380,16 @@ class Commands(commands.Cog, name="commands"):
         source_value = float(args[3])
 
         # SI to Imperial
-        if unit_from in utility.SI_UNITS:  # do conversions as kg-lbs
-            source_in_kg = utility.to_kg(source_value, unit_from)
-            source_in_lbs = source_in_kg / 0.45359237
-            if unit_to == "lbs":
-                output = source_in_lbs
-                await ctx.send(f"{source_value}*{unit_from}* = {output:.2f}*{unit_to}* (2dp)")
-                return
-            elif unit_to == "oz":
-                output = source_in_lbs * 16
-                await ctx.send(f"{source_value}*{unit_from}* = {output:.2f}*{unit_to}* (2dp)")
-                return
-            else:
-                await ctx.send("Invalid units!")
-                return
+        if unit_from in units.SI_UNITS:
+            await ctx.send(units.weight_si_imperial(unit_from, unit_to, source_value))
 
         # Imperial to SI
-        if unit_from in utility.IMPERIAL_UNITS:  # do conversions as km-mi
-            source_in_lbs = utility.to_lbs(source_value, unit_from)
-            source_in_kg = source_in_lbs * 0.45359237
-            if unit_to == "kg":
-                output = source_in_kg
-                await ctx.send(f"{source_value}*{unit_from}* = {output:.2f}*{unit_to}* (2dp)")
-                return
-            elif unit_to == "g":
-                output = source_in_kg * 1000
-                await ctx.send(f"{source_value}*{unit_from}* = {output:.2f}*{unit_to}* (2dp)")
-                return
-            else:
-                await ctx.send("Invalid units!")
-                return
+        elif unit_from in units.IMPERIAL_UNITS:
+            await ctx.send(units.weight_imperial_si(unit_from, unit_to, source_value))
+
         # Sanity-check:
-        await ctx.send("Invalid units!")
+        else:
+            await ctx.send("Invalid units!")
 
     @commands.command(
         name="liquid",
@@ -492,43 +415,16 @@ class Commands(commands.Cog, name="commands"):
         source_value = float(args[3])
 
         # SI to Imperial
-        if unit_from in utility.SI_UNITS:  # do conversions as ml-oz
-            source_in_ml = utility.to_ml(source_value, unit_from)
-            source_in_oz = source_in_ml / 29.57
-            if unit_to == "oz":
-                output = source_in_oz
-                await ctx.send(f"{source_value}*{unit_from}* = {output:.2f}*{unit_to}* (2dp)")
-                return
-            elif unit_to == "pint":
-                output = source_in_oz / 16
-                await ctx.send(f"{source_value}*{unit_from}* = {output:.2f}*{unit_to}* (2dp)")
-                return
-            elif unit_to == "gallon":
-                output = source_in_oz / 128
-                await ctx.send(f"{source_value}*{unit_from}* = {output:.2f}*{unit_to}* (2dp)")
-                return
-            else:
-                await ctx.send("Invalid units!")
-                return
+        if unit_from in units.SI_UNITS:
+            await ctx.send(units.liquid_si_imperial(unit_from, unit_to, source_value))
 
         # Imperial to SI
-        if unit_from in utility.IMPERIAL_UNITS:
-            source_in_oz = utility.to_oz(source_value, unit_from)
-            source_in_ml = source_in_oz * 29.57
-            if unit_to in ("ml", "cc"):
-                output = source_in_ml
-                await ctx.send(f"{source_value}*{unit_from}* = {output:.2f}*{unit_to}* (2dp)")
-                return
-            elif unit_to == "l":
-                output = source_in_ml / 1000
-                await ctx.send(f"{source_value}*{unit_from}* = {output:.2f}*{unit_to}* (2dp)")
-                return
-            else:
-                await ctx.send("Invalid units!")
-                return
+        elif unit_from in units.IMPERIAL_UNITS:
+            await ctx.send(units.liquid_imperial_si(unit_from, unit_to, source_value))
 
         # Sanity-check:
-        await ctx.send("Invalid units!")
+        else:
+            await ctx.send("Invalid units!")
 
     @commands.command(
         name="temp",
@@ -554,27 +450,36 @@ class Commands(commands.Cog, name="commands"):
         output = 0
 
         # 3P2 = 6 possible permutations
-        # Calls the appropriate converter from utility.py
+        # Calls the appropriate converter from units.py
         if unit_from == "C" and unit_to == "K":
-            output = utility.c_to_k(source_value)
+            output = units.c_to_k(source_value)
         elif unit_from == "K" and unit_to == "C":
-            output = utility.k_to_c(source_value)
+            output = units.k_to_c(source_value)
         elif unit_from == "F" and unit_to == "K":
-            output = utility.f_to_k(source_value)
+            output = units.f_to_k(source_value)
         elif unit_from == "K" and unit_to == "F":
-            output = utility.k_to_f(source_value)
+            output = units.k_to_f(source_value)
         elif unit_from == "F" and unit_to == "C":
-            output = utility.f_to_k(source_value)
-            output = utility.k_to_c(output)
+            output = units.f_to_k(source_value)
+            output = units.k_to_c(output)
         elif unit_from == "C" and unit_to == "F":
-            output = utility.c_to_k(source_value)
-            output = utility.k_to_f(output)
+            output = units.c_to_k(source_value)
+            output = units.k_to_f(output)
         else:
             # Sanity-check:
             await ctx.send("Invalid units!")
             return  # short-circuit for invalid units
 
         await ctx.send(f"{source_value}*{unit_from}* = {output:.2f}*{unit_to}* (2dp)")
+
+    @staticmethod
+    def snowflake_to_unix(snowflake):
+        snowflake_bin = bin(snowflake).replace('0b', '')  # 'str' type
+        ms_since_epoch_bin = snowflake_bin[:-22]  # strip trailing data
+        ms_since_epoch = int(ms_since_epoch_bin, 2)  # cast back to decimal
+        ms_since_epoch += 1420070400000  # add Discord Epoch UNIX timestamp
+        sec_since_epoch = ms_since_epoch / 1000  # milliseconds to seconds
+        return sec_since_epoch
 
     @commands.command(
         name="timestamp",
@@ -621,7 +526,7 @@ class Commands(commands.Cog, name="commands"):
 
         # process intermediates
         # see: https://discord.com/developers/docs/reference#convert-snowflake-to-datetime
-        sec_since_epoch = utility.snowflake_to_unix(snowflake)
+        sec_since_epoch = self.snowflake_to_unix(snowflake)
         if not canonical:  # canonical empty (i.e. timezone not provided)
             target_tz = tz.gettz("America/Los_Angeles")
         else:
@@ -649,21 +554,36 @@ class Commands(commands.Cog, name="commands"):
 
         await ctx.send(f"The timestamp of the message you requested is: {output}")
 
+    @staticmethod
+    def pick_quote_from_dict(person_to_quote):
+        quotes = QUOTES_DICTIONARY[person_to_quote]["quotes"]
+        random_quote = quotes[random.randint(0, len(quotes) - 1)]
+        return f"\"{random_quote}\" - {QUOTES_DICTIONARY[person_to_quote]['name']}"
+
     @commands.command(
         name="quote",
         pass_context=True,
-        brief="``!quote``\nGrabs a random message from the channel that a user typed.\nYou can also do !quotes sun "
-              "tzu for sun tzu quotes (more to add!). "
+        brief="Grabs a random message from the channel that a user typed.\nYou can also do `!quote sun "
+              "tzu` for sun tzu quotes (more to come).\n*Alternatively, you may use `!quote surprise me` to get "
+              "a random quote from any author that PolyBot knows!*"
     )
     async def handle_quote(self, ctx):
         args = ctx.message.content.split()
+
+        # Check for quotes in library, if args provided
         if len(args) > 2:
             person_to_quote = args[1].lower() + args[2].lower()
-            if person_to_quote in QUOTES_DICTIONARY.keys():
-                quotes = QUOTES_DICTIONARY[person_to_quote]
-                random_quote = quotes[random.randint(0, len(quotes)-1)]
-                await ctx.send(f"\"{random_quote}\" - {args[1].capitalize()} {args[2].capitalize()}")
+            if person_to_quote == "surpriseme":  # give random quote in library
+                await ctx.send(self.pick_quote_from_dict(random.choice(list(QUOTES_DICTIONARY.keys()))))
                 return
+            elif person_to_quote in QUOTES_DICTIONARY.keys():  # search for particular author
+                await ctx.send(self.pick_quote_from_dict(person_to_quote))
+                return
+            else:  # catch-all
+                await ctx.send(f"I'm so sorry, but I'm afraid I do not know of any quotes from such a person. :pensive:")
+                return
+
+        # Random messages from the channel, if no args provided
         messages = await ctx.message.channel.history(limit=200).flatten()
         rand_num = random.randint(0, len(messages)-1)
         await ctx.send(f"\"{messages[rand_num].content}\" - {messages[rand_num].author.name}")

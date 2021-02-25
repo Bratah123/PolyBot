@@ -649,21 +649,36 @@ class Commands(commands.Cog, name="commands"):
 
         await ctx.send(f"The timestamp of the message you requested is: {output}")
 
+    @staticmethod
+    def pick_quote_from_dict(person_to_quote):
+        quotes = QUOTES_DICTIONARY[person_to_quote]["quotes"]
+        random_quote = quotes[random.randint(0, len(quotes) - 1)]
+        return f"\"{random_quote}\" - {QUOTES_DICTIONARY[person_to_quote]['name']}"
+
     @commands.command(
         name="quote",
         pass_context=True,
-        brief="``!quote``\nGrabs a random message from the channel that a user typed.\nYou can also do !quotes sun "
-              "tzu for sun tzu quotes (more to add!). "
+        brief="Grabs a random message from the channel that a user typed.\nYou can also do `!quotes sun "
+              "tzu` for sun tzu quotes (more to come).\n*Alternatively, you may use `!quotes surprise me` to get "
+              "a random quote from any author that PolyBot knows!*"
     )
     async def handle_quote(self, ctx):
         args = ctx.message.content.split()
+
+        # Check for quotes in library, if args provided
         if len(args) > 2:
             person_to_quote = args[1].lower() + args[2].lower()
-            if person_to_quote in QUOTES_DICTIONARY.keys():
-                quotes = QUOTES_DICTIONARY[person_to_quote]
-                random_quote = quotes[random.randint(0, len(quotes)-1)]
-                await ctx.send(f"\"{random_quote}\" - {args[1].capitalize()} {args[2].capitalize()}")
+            if person_to_quote == "surpriseme":  # give random quote in library
+                await ctx.send(self.pick_quote_from_dict(random.choice(list(QUOTES_DICTIONARY.keys()))))
                 return
+            elif person_to_quote in QUOTES_DICTIONARY.keys():  # search for particular author
+                await ctx.send(self.pick_quote_from_dict(person_to_quote))
+                return
+            else:  # catch-all
+                await ctx.send(f"I'm so sorry, but I'm afraid I do not know of any quotes from such a person. :pensive:")
+                return
+
+        # Random messages from the channel, if no args provided
         messages = await ctx.message.channel.history(limit=200).flatten()
         rand_num = random.randint(0, len(messages)-1)
         await ctx.send(f"\"{messages[rand_num].content}\" - {messages[rand_num].author.name}")

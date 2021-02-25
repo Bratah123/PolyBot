@@ -76,6 +76,7 @@ SUN_TZU_QUOTES = [
     "Correct your mistake as soon as you have found it.",
 ]
 
+
 ALBERT_EINSTEIN = [
     "Genius is 1% talent and 99% hard work",
     "I must be willing to give up what I am in order to become what I will be",
@@ -178,7 +179,93 @@ ALBERT_EINSTEIN = [
     "We cannot solve our problems with the same thinking we used when we created them",
 ]
 
+
+LITTLE_PRINCE = [
+    "And now here is my secret, a very simple secret: It is only with the heart that one can see rightly; what is essential is invisible to the eye.",
+    "All grown-ups were once children... but only few of them remember it.",
+    "It is the time you have wasted for your rose that makes your rose so important.",
+    "The most beautiful things in the world cannot be seen or touched, they are felt with the heart.",
+    "I must endure the presence of a few caterpillars if I wish to become acquainted with the butterflies.",
+    "A rock pile ceases to be a rock pile the moment a single man contemplates it, bearing within him the image of a cathedral.",
+    "But if you tame me, then we shall need each other. To me, you will be unique in all the world. To you, I shall be unique in all the world.",
+    "But the conceited man did not hear him. Conceited people never hear anything but praise.",
+    "Words are the source of misunderstandings.",
+    "It is much more difficult to judge oneself than to judge others. If you succeed in judging yourself rightly, then you are indeed a man of true wisdom.",
+    "What matters most are the simple pleasures so abundant that we can all enjoy them...Happiness doesn't lie in the objects we gather around us. To find it, all we need to do is open our eyes.",
+    "It's the time you spent on your rose that makes your rose so important...People have forgotten this truth, but you mustn't forget it. You become responsible forever for what you've tamed. You're responsible for your rose.",
+    "He fell as gently as a tree falls. There was not even any sound.",
+]
+
+
+JOHN_GREEN = [
+    "As he read, I fell in love the way you fall asleep: slowly, and then all at once.",
+    "You don't get to choose if you get hurt in this world... But you do have some say in who hurts you. I like my choices.",
+    "Some infinities are bigger than other infinities.",
+    "The only way out of the labyrinth of suffering is to forgive.",
+    "The marks humans leave are too often scars.",
+    "Thomas Edison's last words were \"It's very beautiful over there\". I don't know where there is, but I believe it's somewhere, and I hope it's beautiful.",
+    "The world is not a wish-granting factory.",
+    "You can love someone so much... But you can never love people as much as you can miss them.",
+    "What is the point of being alive if you don't at least try to do something remarkable?",
+    "What a treacherous thing to believe that a person is more than a person.",
+    "Maybe our favorite quotations say more about us than about the stories and people we're quoting.",
+    "Imagining the future is a kind of nostalgia. (...) You spend your whole life stuck in the labyrinth, thinking about how you'll escape it one day, and how awesome it will be, and imagining that future keeps you going, but you never do it. You just use the future to escape the present.",
+    "That's always seemed so ridiculous to me, that people want to be around someone because they're pretty. It's like picking your breakfeast cereals based on color instead of taste.",
+    "It is so hard to leave—until you leave. And then it is the easiest goddamned thing in the world.",
+    "Some tourists think Amsterdam is a city of sin, but in truth it is a city of freedom. And in freedom, most people find sin.",
+    "I may die young, but at least I'll die smart.",
+    "Some people have lives; some people have music.",
+    "It always shocked me when I realized that I wasn’t the only person in the world who thought and felt such strange and awful things.",
+    "What you must understand about me is that I’m a deeply unhappy person.",
+    "If you don't imagine, nothing ever happens at all.",
+    "Francois Rabelais. He was a poet. And his last words were \"I go to seek a Great Perhaps.\" That's why I'm going. So I don't have to wait until I die to start seeking a Great Perhaps.",
+    "I'm a grenade and at some point I'm going to blow up and I would like to minimize the casualties, okay?",
+    "You don't remember what happened. What you remember becomes what happened.",
+    "You gave me a forever within the numbered days, and I'm grateful.",
+    "I didn’t need you, you idiot. I picked you. And then you picked me back.",
+    "But it is the nature of stars to cross, and never was Shakespeare more wrong than when he has Cassius note:\n*  The fault, dear Brutus, is not in our stars*\n*  But in ourselves.*",
+    "You like someone who can't like you back because unrequited love can be survived in a way that once-requited love cannot.",
+    "Sometimes you lose a battle. But mischief always wins the war.",
+    "It is easy to forget how full the world is of people, full to bursting, and each of them imaginable and consistently misimagined.",
+    "I just did some calculations and I've been able to determine that you're full of shit.",
+    "There is no shortage of fault to be found amid our stars.",
+    "We need never be hopeless because we can never be irreperably broken.",
+    "I try to live life so that I can live with myself.",
+    "As much as life can suck, it always beats the alternative.",
+    "There's some people in this world who you can just love and love and love no matter what.",
+    "I'm starting to realize that people lack good mirrors. It's so hard for anyone to show us how we look, & so hard for us to show anyone how we feel.",
+    "If people could see me the way I see myself - if they could live in my memories - would anyone love me?",
+    "The weird thing about houses is that they almost always look like nothing is happening inside of them, even though they contain most of our lives. I wondered if that was sort of the point of architecture.",
+    "If only we could see the endless string of consequences that result from our smallest actions. But we can't know better until knowing better is useless.",
+    "Peeing is like a good book in that it is very, very hard to stop once you start.",
+    "Your now is not your forever.",
+    "What matters to you defines your mattering.",
+    "At some point, you gotta stop looking up at the sky, or one of these days you'll look back down and see that you floated away, too.",
+    "Not that smart. Not that hot. Not that nice. Not that funny. That's me: I'm not that.",
+    "Isn't it also that on some fundamental level we find it difficult to understand that other people are human beings in the same way that we are? We idealize them as gods or dismiss them as animals.",
+    "If people were like rain, I was like drizzle and she was a hurricane.",
+    "Our fearlessness shall be our secret weapon.",
+    "You do not immortalize the lost by writing about them. Language buries, but does not resurrect.",
+    "\"Sometimes people don't understand the promises they're making when they make them.\"\n\"Right, of course. But you keep the promise anyway. That’s what love is. Love is keeping the promise anyway.\"",
+    "That's the thing about pain. It demands to be felt",
+]
+
+
 QUOTES_DICTIONARY = {
-    "suntzu": SUN_TZU_QUOTES,
-    "alberteinstein": ALBERT_EINSTEIN,
+    "suntzu": {
+        "name": "Sun Tzu",
+        "quotes": SUN_TZU_QUOTES,
+    },
+    "alberteinstein": {
+        "name": "Albert Einstein",
+        "quotes": ALBERT_EINSTEIN,
+    },
+    "saintexupery": {
+        "name": "Antoine de Saint-Exupéry",
+        "quotes": LITTLE_PRINCE,
+    },
+    "johngreen": {
+        "name": "Albert Einstein",
+        "quotes": JOHN_GREEN,
+    },
 }

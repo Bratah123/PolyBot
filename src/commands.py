@@ -9,7 +9,7 @@ from translate import Translator
 from forex_python.converter import CurrencyRates, CurrencyCodes
 
 import utility
-from constants import SUN_TZU_QUOTES, TOTAL_SUN_TZU_QUOTES
+from constants import SUN_TZU_QUOTES, TOTAL_SUN_TZU_QUOTES, QUOTES_DICTIONARY
 
 
 class Commands(commands.Cog, name="commands"):
@@ -658,8 +658,11 @@ class Commands(commands.Cog, name="commands"):
     async def handle_quote(self, ctx):
         args = ctx.message.content.split()
         if len(args) > 2:
-            if args[1].lower() + args[2].lower() == "suntzu":
-                await ctx.send(f"\"{SUN_TZU_QUOTES[random.randint(0, TOTAL_SUN_TZU_QUOTES-1)]}\" - Sun Tzu")
+            person_to_quote = args[1].lower() + args[2].lower()
+            if person_to_quote in QUOTES_DICTIONARY.keys():
+                quotes = QUOTES_DICTIONARY[person_to_quote]
+                random_quote = quotes[random.randint(0, len(quotes)-1)]
+                await ctx.send(f"\"{random_quote}\" - {args[1].capitalize()} {args[2].capitalize()}")
                 return
         messages = await ctx.message.channel.history(limit=200).flatten()
         rand_num = random.randint(0, len(messages)-1)

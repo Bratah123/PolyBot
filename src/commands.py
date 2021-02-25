@@ -363,7 +363,8 @@ class Commands(commands.Cog, name="commands"):
                     return
                 else:
                     output_in_component = (output_ft_component - int(output_ft_component)) * 12
-                    await ctx.send(f"{source_value}*{unit_from}* = {int(output_ft_component)}*{unit_to}* {output_in_component:.2f}*in* (2dp)")
+                    await ctx.send(
+                        f"{source_value}*{unit_from}* = {int(output_ft_component)}*{unit_to}* {output_in_component:.2f}*in* (2dp)")
                     return
             elif unit_to == "in":
                 output = source_in_mi * 63360
@@ -389,7 +390,8 @@ class Commands(commands.Cog, name="commands"):
                     return
                 else:
                     output_cm_component = (output_m_component - int(output_m_component)) * 100
-                    await ctx.send(f"{source_value}*{unit_from}* = {int(output_m_component)}*{unit_to}* {output_cm_component:.2f}*cm* (2dp)")
+                    await ctx.send(
+                        f"{source_value}*{unit_from}* = {int(output_m_component)}*{unit_to}* {output_cm_component:.2f}*cm* (2dp)")
                     return
             elif unit_to == "cm":
                 output_cm_component = source_in_km * 100000
@@ -399,7 +401,8 @@ class Commands(commands.Cog, name="commands"):
                     return
                 else:
                     output_mm_component = (output_cm_component - int(output_cm_component)) * 10
-                    await ctx.send(f"{source_value}*{unit_from}* = {int(output_cm_component)}*{unit_to}* {output_mm_component:.2f}*cm* (2dp)")
+                    await ctx.send(
+                        f"{source_value}*{unit_from}* = {int(output_cm_component)}*{unit_to}* {output_mm_component:.2f}*cm* (2dp)")
                     return
             elif unit_to == "mm":
                 output = source_in_km * 1000000
@@ -644,6 +647,16 @@ class Commands(commands.Cog, name="commands"):
             return
 
         await ctx.send(f"The timestamp of the message you requested is: {output}")
+
+    @commands.command(
+        aliases=["quote", "random"],
+        pass_context=True,
+        brief="``!randomquote, !quote``\n Grabs a random message from the channel that a user typed."
+    )
+    async def handle_quote(self, ctx):
+        messages = await ctx.message.channel.history(limit=200).flatten()
+        rand_num = random.randint(0, len(messages))
+        await ctx.send(f"\"{messages[rand_num].content}\" - {messages[rand_num].author.name}")
 
 
 def setup(bot):

@@ -558,7 +558,7 @@ class Commands(commands.Cog, name="commands"):
     def pick_quote_from_dict(person_to_quote):
         quotes = QUOTES_DICTIONARY[person_to_quote]["quotes"]
         random_quote = quotes[random.randint(0, len(quotes) - 1)]
-        return f"\"{random_quote}\" - {QUOTES_DICTIONARY[person_to_quote]['name']}"
+        return f"\"{random_quote}\"\n  - {QUOTES_DICTIONARY[person_to_quote]['name']}"
 
     @commands.command(
         name="quote",

@@ -658,8 +658,8 @@ class Commands(commands.Cog, name="commands"):
     @commands.command(
         name="quote",
         pass_context=True,
-        brief="Grabs a random message from the channel that a user typed.\nYou can also do `!quotes sun "
-              "tzu` for sun tzu quotes (more to come).\n*Alternatively, you may use `!quotes surprise me` to get "
+        brief="Grabs a random message from the channel that a user typed.\nYou can also do `!quote sun "
+              "tzu` for sun tzu quotes (more to come).\n*Alternatively, you may use `!quote surprise me` to get "
               "a random quote from any author that PolyBot knows!*"
     )
     async def handle_quote(self, ctx):

@@ -8,7 +8,7 @@ from discord.ext import commands
 from translate import Translator
 from forex_python.converter import CurrencyRates, CurrencyCodes
 
-import utility
+import units
 from constants import QUOTES_DICTIONARY
 
 
@@ -349,8 +349,8 @@ class Commands(commands.Cog, name="commands"):
         source_value = float(args[3])
 
         # SI to Imperial
-        if unit_from in utility.SI_UNITS:  # do conversions as km-mi
-            source_in_km = utility.to_km(source_value, unit_from)
+        if unit_from in units.SI_UNITS:  # do conversions as km-mi
+            source_in_km = units.to_km(source_value, unit_from)
             source_in_mi = source_in_km * 0.621371192
             if unit_to == "mi":
                 output = source_in_mi
@@ -376,8 +376,8 @@ class Commands(commands.Cog, name="commands"):
                 return
 
         # Imperial to SI
-        if unit_from in utility.IMPERIAL_UNITS:  # do conversions as km-mi
-            source_in_mi = utility.to_mi(source_value, unit_from)
+        if unit_from in units.IMPERIAL_UNITS:  # do conversions as km-mi
+            source_in_mi = units.to_mi(source_value, unit_from)
             source_in_km = source_in_mi / 0.621371192
             if unit_to == "km":
                 output = source_in_km
@@ -435,8 +435,8 @@ class Commands(commands.Cog, name="commands"):
         source_value = float(args[3])
 
         # SI to Imperial
-        if unit_from in utility.SI_UNITS:  # do conversions as kg-lbs
-            source_in_kg = utility.to_kg(source_value, unit_from)
+        if unit_from in units.SI_UNITS:  # do conversions as kg-lbs
+            source_in_kg = units.to_kg(source_value, unit_from)
             source_in_lbs = source_in_kg / 0.45359237
             if unit_to == "lbs":
                 output = source_in_lbs
@@ -451,8 +451,8 @@ class Commands(commands.Cog, name="commands"):
                 return
 
         # Imperial to SI
-        if unit_from in utility.IMPERIAL_UNITS:  # do conversions as km-mi
-            source_in_lbs = utility.to_lbs(source_value, unit_from)
+        if unit_from in units.IMPERIAL_UNITS:  # do conversions as km-mi
+            source_in_lbs = units.to_lbs(source_value, unit_from)
             source_in_kg = source_in_lbs * 0.45359237
             if unit_to == "kg":
                 output = source_in_kg
@@ -492,8 +492,8 @@ class Commands(commands.Cog, name="commands"):
         source_value = float(args[3])
 
         # SI to Imperial
-        if unit_from in utility.SI_UNITS:  # do conversions as ml-oz
-            source_in_ml = utility.to_ml(source_value, unit_from)
+        if unit_from in units.SI_UNITS:  # do conversions as ml-oz
+            source_in_ml = units.to_ml(source_value, unit_from)
             source_in_oz = source_in_ml / 29.57
             if unit_to == "oz":
                 output = source_in_oz
@@ -512,8 +512,8 @@ class Commands(commands.Cog, name="commands"):
                 return
 
         # Imperial to SI
-        if unit_from in utility.IMPERIAL_UNITS:
-            source_in_oz = utility.to_oz(source_value, unit_from)
+        if unit_from in units.IMPERIAL_UNITS:
+            source_in_oz = units.to_oz(source_value, unit_from)
             source_in_ml = source_in_oz * 29.57
             if unit_to in ("ml", "cc"):
                 output = source_in_ml
@@ -554,21 +554,21 @@ class Commands(commands.Cog, name="commands"):
         output = 0
 
         # 3P2 = 6 possible permutations
-        # Calls the appropriate converter from utility.py
+        # Calls the appropriate converter from units.py
         if unit_from == "C" and unit_to == "K":
-            output = utility.c_to_k(source_value)
+            output = units.c_to_k(source_value)
         elif unit_from == "K" and unit_to == "C":
-            output = utility.k_to_c(source_value)
+            output = units.k_to_c(source_value)
         elif unit_from == "F" and unit_to == "K":
-            output = utility.f_to_k(source_value)
+            output = units.f_to_k(source_value)
         elif unit_from == "K" and unit_to == "F":
-            output = utility.k_to_f(source_value)
+            output = units.k_to_f(source_value)
         elif unit_from == "F" and unit_to == "C":
-            output = utility.f_to_k(source_value)
-            output = utility.k_to_c(output)
+            output = units.f_to_k(source_value)
+            output = units.k_to_c(output)
         elif unit_from == "C" and unit_to == "F":
-            output = utility.c_to_k(source_value)
-            output = utility.k_to_f(output)
+            output = units.c_to_k(source_value)
+            output = units.k_to_f(output)
         else:
             # Sanity-check:
             await ctx.send("Invalid units!")

@@ -577,7 +577,8 @@ class Commands(commands.Cog, name="commands"):
                     person_to_quote = args[1].lower() + args[2].lower()
                 else:
                     person_to_quote = args[1].lower()  # Greek philosophers are known by single names
-            except:
+            except Exception as e:
+                print(f"Error encountered casting quote author to lower:\n  {e}")
                 await ctx.send(
                     "Hmmm... This situation is most peculiar, "
                     "but I'm afraid your input does not appear to be at all valid.\n"

@@ -251,21 +251,102 @@ JOHN_GREEN = [
 ]
 
 
+NELSON = [
+
+]
+
+
+JOBS = [
+
+]
+
+
+WOZNIAK = [
+
+]
+
+
+ELEANOR = [
+
+]
+
+
+FRANKLIN = [
+
+]
+
+
+TEDDY = [
+
+]
+
+
+CHURCHILL =[
+
+]
+
+
+ARISTOTLE = [
+
+]
+
+
+ANNE = [
+
+]
+
+
 QUOTES_DICTIONARY = {
     "suntzu": {
-        "name": "Sun Tzu",
+        "name": "Sun Tzu (strategist)",
         "quotes": SUN_TZU_QUOTES,
     },
     "alberteinstein": {
-        "name": "Albert Einstein",
+        "name": "Albert Einstein (theoretical physicist)",
         "quotes": ALBERT_EINSTEIN,
     },
     "saintexupery": {
-        "name": "Antoine de Saint-Exupéry",
+        "name": "Antoine de Saint-Exupéry (writer, pioneering aviator)",
         "quotes": LITTLE_PRINCE,
     },
     "johngreen": {
-        "name": "John Green",
+        "name": "John Green (author & YouTube content creator)",
         "quotes": JOHN_GREEN,
+    },
+    "nelsonmandela": {
+        "name": "Nelson Mandela (Former President of South Africa, anti-apartheid revolutionary)",
+        "quotes": NELSON,
+    },
+    "stevejobs": {
+        "name": "Steve Jobs (business magnate, of Apple fame)",
+        "quotes": JOBS,
+    },
+    "stevewozniak": {
+        "name": "Steve Wozniak (electronics engineer, of Apple fame)",
+        "quotes": WOZNIAK,
+    },
+    "eleanorroosevelt": {
+        "name": "Eleanor Roosevelt (Former First Lady of the United States of America)",
+        "quotes": ELEANOR,
+    },
+    "franklinroosevelt": {
+        "name": "Franklin D. Roosevelt (Former President of the United States of America)",
+        "quotes": FRANKLIN,
+    },
+    "theodoreroosevelt": {
+        "name": "Theodore Roosevelt Jr. (Former President of the United States of America)",
+        "quotes": TEDDY,
+    },
+    "winstonchurchill": {
+        "name": "Winston Churchill (Former Prime Minister of the United Kingdom)",
+        "quotes": CHURCHILL,
+    },
+    "aristotle": {
+        "name": "Aristotle (Greek philosopher, polymath)",
+        "quotes": ARISTOTLE,
+    },
+    "annefrank": {
+        "name": "Anne Frank (German-Dutch diarist)",
+        "quotes": ANNE,
     },
 }

@@ -649,7 +649,7 @@ class Commands(commands.Cog, name="commands"):
         await ctx.send(f"The timestamp of the message you requested is: {output}")
 
     @commands.command(
-        aliases=["quote", "random"],
+        aliases="quote",
         pass_context=True,
         brief="``!randomquote, !quote``\n Grabs a random message from the channel that a user typed."
     )

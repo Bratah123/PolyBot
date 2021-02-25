@@ -1,5 +1,3 @@
-TOTAL_SUN_TZU_QUOTES = 75
-
 SUN_TZU_QUOTES = [
     "Appear weak when you are strong, and strong when you are weak",
     "Can you imagine what I would do if I could do all I can?",

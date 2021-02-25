@@ -9,7 +9,7 @@ from translate import Translator
 from forex_python.converter import CurrencyRates, CurrencyCodes
 
 import utility
-from constants import SUN_TZU_QUOTES, TOTAL_SUN_TZU_QUOTES, QUOTES_DICTIONARY
+from constants import QUOTES_DICTIONARY
 
 
 class Commands(commands.Cog, name="commands"):

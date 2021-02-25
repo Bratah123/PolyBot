@@ -265,7 +265,7 @@ QUOTES_DICTIONARY = {
         "quotes": LITTLE_PRINCE,
     },
     "johngreen": {
-        "name": "Albert Einstein",
+        "name": "John Green",
         "quotes": JOHN_GREEN,
     },
 }

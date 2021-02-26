@@ -558,35 +558,61 @@ class Commands(commands.Cog, name="commands"):
     def pick_quote_from_dict(person_to_quote):
         quotes = QUOTES_DICTIONARY[person_to_quote]["quotes"]
         random_quote = quotes[random.randint(0, len(quotes) - 1)]
-        return f"\"{random_quote}\" - {QUOTES_DICTIONARY[person_to_quote]['name']}"
+        return f"\"{random_quote}\"\n  - {QUOTES_DICTIONARY[person_to_quote]['name']}"
+
+    @staticmethod
+    async def pick_quote_from_history(ctx):  # 'ctx' is a discord.py construct
+        messages = await ctx.message.channel.history(limit=200).flatten()
+        rand_num = random.randint(0, len(messages) - 1)
+        # '!quote' and bot messages are not wanted;
+        # get a new pseudo-random number if message is undesired
+        while (
+            (not messages[rand_num].content) or
+            (messages[rand_num].content.startswith("!")) or
+            messages[rand_num].author.bot
+        ):
+            rand_num = random.randint(0, len(messages) - 1)
+        return f"\"{messages[rand_num].content}\"\n  - {messages[rand_num].author.name}"
 
     @commands.command(
         name="quote",
         pass_context=True,
         brief="Grabs a random message from the channel that a user typed.\nYou can also do `!quote sun "
-              "tzu` for sun tzu quotes (more to come).\n*Alternatively, you may use `!quote surprise me` to get "
+              "tzu` for Sun Tzu quotes (more to come).\n*Alternatively, you may use `!quote surprise me` to get "
               "a random quote from any author that PolyBot knows!*"
     )
     async def handle_quote(self, ctx):
         args = ctx.message.content.split()
 
         # Check for quotes in library, if args provided
-        if len(args) > 2:
-            person_to_quote = args[1].lower() + args[2].lower()
+        if len(args) > 1:
+            try:
+                if len(args) == 3:  # first & last name provided (alt: 'surprise me')
+                    person_to_quote = args[1].lower() + args[2].lower()
+                else:
+                    person_to_quote = args[1].lower()  # Greek philosophers are known by single names
+            except Exception as e:
+                print(f"Error encountered casting quote author to lower:\n  {e}")
+                await ctx.send(
+                    "Hmmm... This situation is most peculiar, "
+                    "but I'm afraid your input does not appear to be at all valid.\n"
+                    "May I humbly suggest checking `!help quote` for examples? :face_with_monocle: "
+                )
+                return
             if person_to_quote == "surpriseme":  # give random quote in library
-                await ctx.send(self.pick_quote_from_dict(random.choice(list(QUOTES_DICTIONARY.keys()))))
+                rand_author = random.choice(list(QUOTES_DICTIONARY.keys()))
+                await ctx.send(self.pick_quote_from_dict(rand_author))
                 return
             elif person_to_quote in QUOTES_DICTIONARY.keys():  # search for particular author
                 await ctx.send(self.pick_quote_from_dict(person_to_quote))
                 return
             else:  # catch-all
-                await ctx.send(f"I'm so sorry, but I'm afraid I do not know of any quotes from such a person. :pensive:")
+                await ctx.send("I'm so sorry, but I'm afraid I do not know of any quotes from such a person. :pensive:")
                 return
 
         # Random messages from the channel, if no args provided
-        messages = await ctx.message.channel.history(limit=200).flatten()
-        rand_num = random.randint(0, len(messages)-1)
-        await ctx.send(f"\"{messages[rand_num].content}\" - {messages[rand_num].author.name}")
+        output = await self.pick_quote_from_history(ctx)
+        await ctx.send(output)
 
 
 def setup(bot):

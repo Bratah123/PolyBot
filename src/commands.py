@@ -560,6 +560,19 @@ class Commands(commands.Cog, name="commands"):
         random_quote = quotes[random.randint(0, len(quotes) - 1)]
         return f"\"{random_quote}\"\n  - {QUOTES_DICTIONARY[person_to_quote]['name']}"
 
+    @staticmethod
+    def pick_quote_from_history(ctx):  # 'ctx' is a discord.py construct
+        messages = await ctx.message.channel.history(limit=200).flatten()
+        rand_num = random.randint(0, len(messages) - 1)
+        # '!quote' and bot messages are not wanted;
+        # get a new pseudo-random number if message is undesired
+        while (
+            ("!quote" in messages[rand_num].content) or
+            messages[rand_num].author.bot
+        ):
+            rand_num = random.randint(0, len(messages) - 1)
+        return f"\"{messages[rand_num].content}\"\n  - {messages[rand_num].author.name}"
+
     @commands.command(
         name="quote",
         pass_context=True,
@@ -571,9 +584,9 @@ class Commands(commands.Cog, name="commands"):
         args = ctx.message.content.split()
 
         # Check for quotes in library, if args provided
-        if len(args) > 2:
+        if len(args) > 1:
             try:
-                if len(args) > 3:
+                if len(args) == 3:  # first & last name provided (alt: 'surprise me')
                     person_to_quote = args[1].lower() + args[2].lower()
                 else:
                     person_to_quote = args[1].lower()  # Greek philosophers are known by single names
@@ -586,7 +599,8 @@ class Commands(commands.Cog, name="commands"):
                 )
                 return
             if person_to_quote == "surpriseme":  # give random quote in library
-                await ctx.send(self.pick_quote_from_dict(random.choice(list(QUOTES_DICTIONARY.keys()))))
+                rand_author = random.choice(list(QUOTES_DICTIONARY.keys()))
+                await ctx.send(self.pick_quote_from_dict(rand_author))
                 return
             elif person_to_quote in QUOTES_DICTIONARY.keys():  # search for particular author
                 await ctx.send(self.pick_quote_from_dict(person_to_quote))
@@ -596,9 +610,7 @@ class Commands(commands.Cog, name="commands"):
                 return
 
         # Random messages from the channel, if no args provided
-        messages = await ctx.message.channel.history(limit=200).flatten()
-        rand_num = random.randint(0, len(messages)-1)
-        await ctx.send(f"\"{messages[rand_num].content}\" - {messages[rand_num].author.name}")
+        await ctx.send(self.pick_quote_from_history(ctx))
 
 
 def setup(bot):

@@ -567,7 +567,8 @@ class Commands(commands.Cog, name="commands"):
         # '!quote' and bot messages are not wanted;
         # get a new pseudo-random number if message is undesired
         while (
-            ("!quote" in messages[rand_num].content) or
+            (not messages[rand_num].content) or
+            (messages[rand_num].content.startswith("!")) or
             messages[rand_num].author.bot
         ):
             rand_num = random.randint(0, len(messages) - 1)

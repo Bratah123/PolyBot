@@ -561,7 +561,7 @@ class Commands(commands.Cog, name="commands"):
         return f"\"{random_quote}\"\n  - {QUOTES_DICTIONARY[person_to_quote]['name']}"
 
     @staticmethod
-    def pick_quote_from_history(ctx):  # 'ctx' is a discord.py construct
+    async def pick_quote_from_history(ctx):  # 'ctx' is a discord.py construct
         messages = await ctx.message.channel.history(limit=200).flatten()
         rand_num = random.randint(0, len(messages) - 1)
         # '!quote' and bot messages are not wanted;
@@ -610,7 +610,8 @@ class Commands(commands.Cog, name="commands"):
                 return
 
         # Random messages from the channel, if no args provided
-        await ctx.send(self.pick_quote_from_history(ctx))
+        output = await self.pick_quote_from_history(ctx)
+        await ctx.send(output)
 
 
 def setup(bot):

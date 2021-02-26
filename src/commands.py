@@ -297,7 +297,6 @@ class Commands(commands.Cog, name="commands"):
         brief="Converts binary representations to ASCII."
     )
     async def bin_to_ascii(self, ctx):
-        # @author KOOKIIE
         args = ctx.message.content.split(" ")
         if len(args) < 2:
             await ctx.send("Please provide all necessary arguments. !toascii <binary string>")
@@ -314,7 +313,6 @@ class Commands(commands.Cog, name="commands"):
         brief="Converts ASCII to binary representation."
     )
     async def bin_from_ascii(self, ctx):
-        # @author KOOKIIE
         args = ctx.message.content.split(" ")
         if len(args) < 2:
             await ctx.send("Please provide all necessary arguments. !fromascii <ASCII string>")
@@ -335,7 +333,6 @@ class Commands(commands.Cog, name="commands"):
         brief="Converts between Imperial (U.S. customary) and SI length units. E.g. *km* to *mi*, or *ft* to *cm*."
     )
     async def length_conversion(self, ctx):
-        # @author KOOKIIE
         args = ctx.message.content.split(" ")
         if len(args) < 4:
             await ctx.send(
@@ -366,7 +363,6 @@ class Commands(commands.Cog, name="commands"):
         brief="Converts between Imperial (U.S. customary) and SI mass units. E.g. *kg* to *lbs*, or *oz* to *g*."
     )
     async def weight_conversion(self, ctx):
-        # @author KOOKIIE
         args = ctx.message.content.split(" ")
         if len(args) < 4:
             await ctx.send(
@@ -401,7 +397,6 @@ class Commands(commands.Cog, name="commands"):
         )
     )
     async def liquid_conversion(self, ctx):
-        # @author KOOKIIE
         args = ctx.message.content.split(" ")
         if len(args) < 4:
             await ctx.send(
@@ -435,7 +430,6 @@ class Commands(commands.Cog, name="commands"):
         )
     )
     async def temp_conversion(self, ctx):
-        # @author KOOKIIE
         args = ctx.message.content.split(" ")
         if len(args) < 4:
             await ctx.send(
@@ -496,7 +490,6 @@ class Commands(commands.Cog, name="commands"):
         )
     )
     async def get_timestamp(self, ctx):
-        # @author KOOKIIE
         args = ctx.message.content.split(" ")
         if (len(args) < 2) or (len(args) > 3):
             await ctx.send(

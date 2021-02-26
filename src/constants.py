@@ -575,67 +575,67 @@ ANNE = [
 
 QUOTES_DICTIONARY = {
     "suntzu": {
-        "name": "Sun Tzu (strategist)",
+        "name": "Sun Tzu",
         "quotes": SUN_TZU_QUOTES,
     },
     "alberteinstein": {
-        "name": "Albert Einstein (theoretical physicist)",
+        "name": "Albert Einstein",
         "quotes": ALBERT_EINSTEIN,
     },
     "saintexupery": {
-        "name": "Antoine de Saint-Exupéry (writer, pioneering aviator)",
+        "name": "Antoine de Saint-Exupéry",
         "quotes": LITTLE_PRINCE,
     },
     "johngreen": {
-        "name": "John Green (author & YouTube content creator)",
+        "name": "John Green",
         "quotes": JOHN_GREEN,
     },
     "nelsonmandela": {
-        "name": "Nelson Mandela (Former President of South Africa, anti-apartheid revolutionary)",
+        "name": "Nelson Mandela",
         "quotes": NELSON,
     },
     "stevejobs": {
-        "name": "Steve Jobs (business magnate, of Apple fame)",
+        "name": "Steve Jobs",
         "quotes": JOBS,
     },
     "stevewozniak": {
-        "name": "Steve Wozniak (electronics engineer, of Apple fame)",
+        "name": "Steve Wozniak",
         "quotes": WOZNIAK,
     },
     "briankernighan": {
-        "name": "Brian Kernighan (Computer Scientist, known for: Unix, AWK, AMPL, Kernighan–Lin algorithm, as well as various books on C, UNIX, and Go)",
+        "name": "Brian Kernighan",
         "quotes": BRIAN,
     },
     "kenthompson": {
-        "name": "Ken Thompson (Computer Scientist, known for: Unix, B, Belle, UTF-8, Plan 9, Inferno, grep, Endgame tablebase, Go)",
+        "name": "Ken Thompson",
         "quotes": KEN,
     },
     "dennisritchie": {
-        "name": "Dennis Ritchie (Computer Scientist, known for: ALTRAN, B, BCPL, C, Multics, Unix)",
+        "name": "Dennis Ritchie",
         "quotes": DENNIS,
     },
     "eleanorroosevelt": {
-        "name": "Eleanor Roosevelt (Former First Lady of the United States of America)",
+        "name": "Eleanor Roosevelt",
         "quotes": ELEANOR,
     },
     "franklinroosevelt": {
-        "name": "Franklin D. Roosevelt (Former President of the United States of America)",
+        "name": "Franklin D. Roosevelt",
         "quotes": FRANKLIN,
     },
     "theodoreroosevelt": {
-        "name": "Theodore Roosevelt Jr. (Former President of the United States of America)",
+        "name": "Theodore Roosevelt Jr.",
         "quotes": TEDDY,
     },
     "winstonchurchill": {
-        "name": "Winston Churchill (Former Prime Minister of the United Kingdom)",
+        "name": "Winston Churchill",
         "quotes": CHURCHILL,
     },
     "aristotle": {
-        "name": "Aristotle (Greek philosopher, polymath)",
+        "name": "Aristotle",
         "quotes": ARISTOTLE,
     },
     "annefrank": {
-        "name": "Anne Frank (German-Dutch diarist)",
+        "name": "Anne Frank",
         "quotes": ANNE,
     },
 }

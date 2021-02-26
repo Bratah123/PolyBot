@@ -583,7 +583,7 @@ QUOTES_DICTIONARY = {
         "quotes": ALBERT_EINSTEIN,
     },
     "saintexupery": {
-        "name": "Antoine de Saint-Exupéry (writer, pioneering aviator)",
+        "name": "Antoine de Saint-Exupéry (writer)",
         "quotes": LITTLE_PRINCE,
     },
     "johngreen": {
@@ -591,47 +591,47 @@ QUOTES_DICTIONARY = {
         "quotes": JOHN_GREEN,
     },
     "nelsonmandela": {
-        "name": "Nelson Mandela (Former President of South Africa, anti-apartheid revolutionary)",
+        "name": "Nelson Mandela (Former President of South Africa)",
         "quotes": NELSON,
     },
     "stevejobs": {
-        "name": "Steve Jobs (business magnate, of Apple fame)",
+        "name": "Steve Jobs (business magnate)",
         "quotes": JOBS,
     },
     "stevewozniak": {
-        "name": "Steve Wozniak (electronics engineer, of Apple fame)",
+        "name": "Steve Wozniak (electronics engineer)",
         "quotes": WOZNIAK,
     },
     "briankernighan": {
-        "name": "Brian Kernighan (Computer Scientist, known for: Unix, AWK, AMPL, Kernighan–Lin algorithm, as well as various books on C, UNIX, and Go)",
+        "name": "Brian Kernighan (Computer Scientist)",
         "quotes": BRIAN,
     },
     "kenthompson": {
-        "name": "Ken Thompson (Computer Scientist, known for: Unix, B, Belle, UTF-8, Plan 9, Inferno, grep, Endgame tablebase, Go)",
+        "name": "Ken Thompson (Computer Scientist)",
         "quotes": KEN,
     },
     "dennisritchie": {
-        "name": "Dennis Ritchie (Computer Scientist, known for: ALTRAN, B, BCPL, C, Multics, Unix)",
+        "name": "Dennis Ritchie (Computer Scientist)",
         "quotes": DENNIS,
     },
     "eleanorroosevelt": {
-        "name": "Eleanor Roosevelt (Former First Lady of the United States of America)",
+        "name": "Eleanor Roosevelt (Former First Lady of the USA)",
         "quotes": ELEANOR,
     },
     "franklinroosevelt": {
-        "name": "Franklin D. Roosevelt (Former President of the United States of America)",
+        "name": "Franklin D. Roosevelt (Former President of the USA)",
         "quotes": FRANKLIN,
     },
     "theodoreroosevelt": {
-        "name": "Theodore Roosevelt Jr. (Former President of the United States of America)",
+        "name": "Theodore Roosevelt Jr. (Former President of the USA)",
         "quotes": TEDDY,
     },
     "winstonchurchill": {
-        "name": "Winston Churchill (Former Prime Minister of the United Kingdom)",
+        "name": "Winston Churchill (Former Prime Minister of the UK)",
         "quotes": CHURCHILL,
     },
     "aristotle": {
-        "name": "Aristotle (Greek philosopher, polymath)",
+        "name": "Aristotle (Greek philosopher)",
         "quotes": ARISTOTLE,
     },
     "annefrank": {

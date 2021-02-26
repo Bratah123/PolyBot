@@ -575,67 +575,67 @@ ANNE = [
 
 QUOTES_DICTIONARY = {
     "suntzu": {
-        "name": "Sun Tzu (strategist)",
+        "name": "Sun Tzu",
         "quotes": SUN_TZU_QUOTES,
     },
     "alberteinstein": {
-        "name": "Albert Einstein (theoretical physicist)",
+        "name": "Albert Einstein",
         "quotes": ALBERT_EINSTEIN,
     },
     "saintexupery": {
-        "name": "Antoine de Saint-Exupéry (writer)",
+        "name": "Antoine de Saint-Exupéry",
         "quotes": LITTLE_PRINCE,
     },
     "johngreen": {
-        "name": "John Green (author & YouTube content creator)",
+        "name": "John Green",
         "quotes": JOHN_GREEN,
     },
     "nelsonmandela": {
-        "name": "Nelson Mandela (Former President of South Africa)",
+        "name": "Nelson Mandela",
         "quotes": NELSON,
     },
     "stevejobs": {
-        "name": "Steve Jobs (business magnate)",
+        "name": "Steve Jobs",
         "quotes": JOBS,
     },
     "stevewozniak": {
-        "name": "Steve Wozniak (electronics engineer)",
+        "name": "Steve Wozniak",
         "quotes": WOZNIAK,
     },
     "briankernighan": {
-        "name": "Brian Kernighan (Computer Scientist)",
+        "name": "Brian Kernighan",
         "quotes": BRIAN,
     },
     "kenthompson": {
-        "name": "Ken Thompson (Computer Scientist)",
+        "name": "Ken Thompson",
         "quotes": KEN,
     },
     "dennisritchie": {
-        "name": "Dennis Ritchie (Computer Scientist)",
+        "name": "Dennis Ritchie",
         "quotes": DENNIS,
     },
     "eleanorroosevelt": {
-        "name": "Eleanor Roosevelt (Former First Lady of the USA)",
+        "name": "Eleanor Roosevelt",
         "quotes": ELEANOR,
     },
     "franklinroosevelt": {
-        "name": "Franklin D. Roosevelt (Former President of the USA)",
+        "name": "Franklin D. Roosevelt",
         "quotes": FRANKLIN,
     },
     "theodoreroosevelt": {
-        "name": "Theodore Roosevelt Jr. (Former President of the USA)",
+        "name": "Theodore Roosevelt Jr.",
         "quotes": TEDDY,
     },
     "winstonchurchill": {
-        "name": "Winston Churchill (Former Prime Minister of the UK)",
+        "name": "Winston Churchill",
         "quotes": CHURCHILL,
     },
     "aristotle": {
-        "name": "Aristotle (Greek philosopher)",
+        "name": "Aristotle",
         "quotes": ARISTOTLE,
     },
     "annefrank": {
-        "name": "Anne Frank (German-Dutch diarist)",
+        "name": "Anne Frank",
         "quotes": ANNE,
     },
 }

@@ -13,13 +13,11 @@ QUOTE_LIBRARY = yaml_parser.yaml_load(FILE_TO_CHECK)
 
 
 print("*** Standalone Module - YAML Validator ***")
-print(f"\nNow attempting to catch any non-ASCII quotes in {FILE_TO_CHECK}:")
+print(f"\nNow attempting to catch any non-ASCII quotes in {FILE_TO_CHECK}...")
 for person in QUOTE_LIBRARY.values():
 	for quote in person.get("quotes"):
-		try:
-			quote.isascii()
-		except UnicodeDecodeError:
-			print(f"Found non-ASCII:\n  {quote}")
+		if not quote.isascii():
+			print(f"  Found non-ASCII:\n  {quote}")
 
 
 print("Catch sequence completed!")

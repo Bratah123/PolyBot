@@ -579,19 +579,13 @@ class Commands(commands.Cog, name="commands"):
 
         # Check for quotes in library, if args provided
         if len(args) > 1:
-            try:
-                if len(args) == 3:  # first & last name provided (alt: 'surprise me')
-                    person_to_quote = args[1].lower() + args[2].lower()
-                else:
-                    person_to_quote = args[1].lower()  # Greek philosophers are known by single names
-            except Exception as e:
-                print(f"Error encountered casting quote author to lower:\n  {e}")
-                await ctx.send(
-                    "Hmmm... This situation is most peculiar, "
-                    "but I'm afraid your input does not appear to be at all valid.\n"
-                    "May I humbly suggest checking `!help quote` for examples? :face_with_monocle: "
-                )
-                return
+            # Format author name (only accept 1 or 2 word names)
+            # Try-catch not needed, since Discord message is parsed as String
+            if len(args) == 3:  # first & last name provided (alt: 'surprise me')
+                person_to_quote = args[1].lower() + args[2].lower()
+            else:
+                person_to_quote = args[1].lower()  # Greek philosophers are known by single names
+
             if person_to_quote == "surpriseme":  # give random quote in library
                 rand_author = random.choice(list(self.QUOTE_LIBRARY.keys()))
                 await ctx.send(self.pick_quote_from_dict(rand_author))

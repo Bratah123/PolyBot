@@ -1,4 +1,4 @@
-# @author KOOKIIE
+"""Module used by unit-conversion commands"""
 
 
 def to_km(value, unit):

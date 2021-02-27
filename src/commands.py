@@ -9,7 +9,7 @@ from translate import Translator
 from forex_python.converter import CurrencyRates, CurrencyCodes
 
 import units
-from constants import QUOTES_DICTIONARY
+import yaml_parser
 
 
 class Commands(commands.Cog, name="commands"):
@@ -48,6 +48,7 @@ class Commands(commands.Cog, name="commands"):
             "https://cdn.discordapp.com/attachments/731528944402300977/801529976372985866/dice-six-faces-five.png",
             "https://cdn.discordapp.com/attachments/731528944402300977/801529992144093194/dice-six-faces-six.png"
         )
+        self.QUOTE_LIBRARY = yaml_parser.yaml_load("quote_library.yaml")
 
     @commands.command(
         name="translate",
@@ -547,11 +548,10 @@ class Commands(commands.Cog, name="commands"):
 
         await ctx.send(f"The timestamp of the message you requested is: {output}")
 
-    @staticmethod
-    def pick_quote_from_dict(person_to_quote):
-        quotes = QUOTES_DICTIONARY[person_to_quote]["quotes"]
+    def pick_quote_from_dict(self, person_to_quote):
+        quotes = self.QUOTE_LIBRARY[person_to_quote]["quotes"]
         random_quote = quotes[random.randint(0, len(quotes) - 1)]
-        return f"\"{random_quote}\"\n  - {QUOTES_DICTIONARY[person_to_quote]['name']}"
+        return f"\"{random_quote}\"\n  - {self.QUOTE_LIBRARY[person_to_quote]['name']}"
 
     @staticmethod
     async def pick_quote_from_history(ctx):  # 'ctx' is a discord.py construct
@@ -579,24 +579,18 @@ class Commands(commands.Cog, name="commands"):
 
         # Check for quotes in library, if args provided
         if len(args) > 1:
-            try:
-                if len(args) == 3:  # first & last name provided (alt: 'surprise me')
-                    person_to_quote = args[1].lower() + args[2].lower()
-                else:
-                    person_to_quote = args[1].lower()  # Greek philosophers are known by single names
-            except Exception as e:
-                print(f"Error encountered casting quote author to lower:\n  {e}")
-                await ctx.send(
-                    "Hmmm... This situation is most peculiar, "
-                    "but I'm afraid your input does not appear to be at all valid.\n"
-                    "May I humbly suggest checking `!help quote` for examples? :face_with_monocle: "
-                )
-                return
+            # Format author name (only accept 1 or 2 word names)
+            # Try-catch not needed, since Discord message is parsed as String
+            if len(args) == 3:  # first & last name provided (alt: 'surprise me')
+                person_to_quote = args[1].lower() + args[2].lower()
+            else:
+                person_to_quote = args[1].lower()  # Greek philosophers are known by single names
+
             if person_to_quote == "surpriseme":  # give random quote in library
-                rand_author = random.choice(list(QUOTES_DICTIONARY.keys()))
+                rand_author = random.choice(list(self.QUOTE_LIBRARY.keys()))
                 await ctx.send(self.pick_quote_from_dict(rand_author))
                 return
-            elif person_to_quote in QUOTES_DICTIONARY.keys():  # search for particular author
+            elif person_to_quote in self.QUOTE_LIBRARY.keys():  # search for particular author
                 await ctx.send(self.pick_quote_from_dict(person_to_quote))
                 return
             else:  # catch-all

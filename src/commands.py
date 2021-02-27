@@ -549,11 +549,10 @@ class Commands(commands.Cog, name="commands"):
 
         await ctx.send(f"The timestamp of the message you requested is: {output}")
 
-    @staticmethod
-    def pick_quote_from_dict(person_to_quote):
-        quotes = QUOTES_DICTIONARY[person_to_quote]["quotes"]
+    def pick_quote_from_dict(self, person_to_quote):
+        quotes = self.QUOTE_LIBRARY[person_to_quote]["quotes"]
         random_quote = quotes[random.randint(0, len(quotes) - 1)]
-        return f"\"{random_quote}\"\n  - {QUOTES_DICTIONARY[person_to_quote]['name']}"
+        return f"\"{random_quote}\"\n  - {self.QUOTE_LIBRARY[person_to_quote]['name']}"
 
     @staticmethod
     async def pick_quote_from_history(ctx):  # 'ctx' is a discord.py construct
@@ -595,10 +594,10 @@ class Commands(commands.Cog, name="commands"):
                 )
                 return
             if person_to_quote == "surpriseme":  # give random quote in library
-                rand_author = random.choice(list(QUOTES_DICTIONARY.keys()))
+                rand_author = random.choice(list(self.QUOTE_LIBRARY.keys()))
                 await ctx.send(self.pick_quote_from_dict(rand_author))
                 return
-            elif person_to_quote in QUOTES_DICTIONARY.keys():  # search for particular author
+            elif person_to_quote in self.QUOTE_LIBRARY.keys():  # search for particular author
                 await ctx.send(self.pick_quote_from_dict(person_to_quote))
                 return
             else:  # catch-all

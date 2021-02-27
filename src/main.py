@@ -87,4 +87,4 @@ async def credit_command(ctx):
 
 if __name__ == '__main__':
     print("Loading Bot..")
-    bot.run("")
+    bot.run("TOKEN HERE")

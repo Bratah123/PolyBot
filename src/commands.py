@@ -10,7 +10,6 @@ from forex_python.converter import CurrencyRates, CurrencyCodes
 
 import units
 import parser
-from constants import QUOTES_DICTIONARY
 
 
 class Commands(commands.Cog, name="commands"):

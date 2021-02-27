@@ -48,6 +48,10 @@ async def help_command(ctx):
 
     # Flatten command-name list to String, to add to embed
     cmd_list_str = "\n".join(cmd_list)
+    detailed = (
+        "\nYou may use `!help <command>` for detailed help for "
+        "individual commands:\n**E.g.**: `!help quote`"
+    )
 
     # Boiler plate embed message builder
     embed_msg = discord.Embed(
@@ -57,11 +61,30 @@ async def help_command(ctx):
     )
 
     embed_msg.add_field(name="User Commands", value=cmd_list_str, inline=False)
+    embed_msg.add_field(name="Additioanl Options", value=detailed, inline=False)
     embed_msg.set_footer(text="PolyBot")
 
     await ctx.send(embed=embed_msg)
 
 
+@bot.command(name='credit', pass_context=True)  # Here is our own help command we add
+async def credit_command(ctx):
+    # Boiler plate embed message builder
+    embed_msg = discord.Embed(
+        title="About",
+        description="PolyBot is an all-in-one utility bot created by Brandon",
+        color=0x00FFFF,
+    )
+    links = (
+        "GitHub: <https://github.com/Bratah123/> \n"
+        "Website: <https://www.bratah.org/> \n"
+        "Repository: <https://github.com/Bratah123/PolyBot/>"
+    )
+    embed_msg.add_field(name="Links", value=links, inline=False)
+    embed_msg.set_footer(text="PolyBot")
+    await ctx.send(embed=embed_msg)
+
+
 if __name__ == '__main__':
     print("Loading Bot..")
-    bot.run("TOKEN HERE")
+    bot.run("")

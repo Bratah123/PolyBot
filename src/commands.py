@@ -9,7 +9,7 @@ from translate import Translator
 from forex_python.converter import CurrencyRates, CurrencyCodes
 
 import units
-import parser
+import yaml_parser
 
 
 class Commands(commands.Cog, name="commands"):
@@ -48,7 +48,7 @@ class Commands(commands.Cog, name="commands"):
             "https://cdn.discordapp.com/attachments/731528944402300977/801529976372985866/dice-six-faces-five.png",
             "https://cdn.discordapp.com/attachments/731528944402300977/801529992144093194/dice-six-faces-six.png"
         )
-        self.QUOTE_LIBRARY = parser.yaml_load("quote_library.yaml")
+        self.QUOTE_LIBRARY = yaml_parser.yaml_load("quote_library.yaml")
 
     @commands.command(
         name="translate",

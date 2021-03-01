@@ -24,3 +24,19 @@ Windows:
 2. Run `setup.bat`
     - This creates a local virtual environment, and adds the required dependencies
 3. Either run `src/main.py` manually, or use `start.bat`
+
+## About Commit 334c4f1
+[CVE-2021-21330 - GitHub Advisory Database](https://github.com/advisories/GHSA-v6wp-4m6f-gcjg)  
+Following the release of the advisory (see above), we have updated dependencies to include the security patch(es).  
+
+#### If you cloned/downloaded PolyBot prior to this commit, please update ASAP!
+
+*Note: `aiohttp` is a library used by `discord.py`, which is the basis for most Python-based bots for Discord, including `PolyBot`*.  
+### To grab the updates
+1. Perform `git pull`
+2. Grab the new dependencies  
+    - For Global Environment:  
+      - `pip install -r requirements.txt`  
+    - For Virtual Environment:  
+      - `venv/scripts/activate`  
+      - `pip install -r requirements.txt`  

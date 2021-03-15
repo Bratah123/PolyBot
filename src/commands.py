@@ -10,6 +10,7 @@ from forex_python.converter import CurrencyRates, CurrencyCodes
 
 import units
 import yaml_parser
+import struct
 
 
 class Commands(commands.Cog, name="commands"):
@@ -99,6 +100,28 @@ class Commands(commands.Cog, name="commands"):
             return
 
         await ctx.send(f"Hexadecimal: 0x{str(number)[2:].upper()}")
+
+    @commands.command(
+        name="toaob",
+        pass_context=True,
+        brief="Converts decimal number to array of bytes."
+    )
+    async def to_aob(self, ctx):
+        args = ctx.message.content.split()
+        if len(args) < 2:
+            await ctx.send("Please provide all necessary arguments. !toaob <decimal_number>")
+            return
+
+        try:
+            num_to_convert = int(args[1])
+        except Exception as e:
+            print(e)
+            await ctx.send("That is not a valid decimal number")
+            return
+        # This is so ugly, but basically it removes the b'' part in bytes like objects in python
+        # for example b'xff\xff\xff\xff' -> FF FF FF FF
+        aob = " ".join("".join(str(struct.pack("i", num_to_convert))[1:]).replace("'", "").replace("\\", "").split("x"))
+        await ctx.send("AOB: " + aob.upper())
 
     @commands.command(
         name="fromhex",
@@ -560,9 +583,9 @@ class Commands(commands.Cog, name="commands"):
         # '!quote' and bot messages are not wanted;
         # get a new pseudo-random number if message is undesired
         while (
-            (not messages[rand_num].content) or
-            (messages[rand_num].content.startswith("!")) or
-            messages[rand_num].author.bot
+                (not messages[rand_num].content) or
+                (messages[rand_num].content.startswith("!")) or
+                messages[rand_num].author.bot
         ):
             rand_num = random.randint(0, len(messages) - 1)
         return f"\"{messages[rand_num].content}\"\n  - {messages[rand_num].author.name}"

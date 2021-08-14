@@ -10,7 +10,7 @@ colorama==0.4.4
 discord.py==1.6.0
 distlib==0.3.1
 filelock==3.0.12
-forex-python==1.5
+forex-python==1.6
 identify==1.5.13
 idna==2.10
 lxml==4.6.2

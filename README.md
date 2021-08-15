@@ -34,7 +34,7 @@ Following the release of the advisory (see above), we have updated dependencies 
 #### If you cloned/downloaded PolyBot prior to this commit, please update ASAP!
 
 *Note: `aiohttp` is a library used by `discord.py`, which is the basis for most Python-based bots for Discord, including `PolyBot`*.  
-### To grab the updates
+### To grab the updates (Applicable for all kinds of dependency updates)
 1. Perform `git pull`
 2. Grab the new dependencies  
     - For Global Environment:  

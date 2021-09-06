@@ -3,6 +3,7 @@ Poly bot is a discord bot that provides all type of conversions (I.E. language, 
 
 Poly bot aims to allow users in a discord server to convert any values into a desired type of measurement!
 
+Hosted via AWS:
 [Invite the bot to your server!](https://discord.com/oauth2/authorize?client_id=619763426402631700&scope=bot&permissions=8&response_type=code)
 
 ## Features

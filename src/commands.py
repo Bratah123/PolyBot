@@ -609,7 +609,7 @@ class Commands(commands.Cog, name="commands"):
             else:
                 person_to_quote = args[1].lower()  # Greek philosophers are known by single names
 
-            if person_to_quote == "surpriseme":  # give random quote in library
+            if person_to_quote in ("surpriseme", "surprise me"):  # give random quote in library
                 rand_author = random.choice(list(self.QUOTE_LIBRARY.keys()))
                 await ctx.send(self.pick_quote_from_dict(rand_author))
                 return

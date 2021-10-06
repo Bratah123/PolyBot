@@ -34,7 +34,7 @@ def yaml_load(filepath) -> "Reads the contents of a single-document YAML file":
         Generic error
     """
     try:
-        with open(filepath, "r") as file_data:
+        with open(filepath, "r", encoding="utf-8") as file_data:
             data = yaml.load(file_data)
         return data
 

@@ -17,10 +17,10 @@ print(f"\nNow attempting to catch any non-ASCII quotes in {FILE_TO_CHECK}...")
 for person in QUOTE_LIBRARY.values():
 	for quote in person.get("quotes"):
 		if not quote.isascii():
-			print(f"  Found non-ASCII:\n  {quote}")
+			print(f"  Found non-ASCII by {person}:\n  {quote}")
 
 
-print("Catch sequence completed!")
-print("-----------------------------------")
-print(f"\nAppendix - data parsed from {FILE_TO_CHECK}:\n")
-print(QUOTE_LIBRARY)
+print("\nCatch sequence completed!")
+# print("-----------------------------------")
+# print(f"\nAppendix - data parsed from {FILE_TO_CHECK}:\n")
+# print(QUOTE_LIBRARY)

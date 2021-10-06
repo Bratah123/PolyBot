@@ -50,6 +50,7 @@ class Commands(commands.Cog, name="commands"):
             "https://cdn.discordapp.com/attachments/731528944402300977/801529992144093194/dice-six-faces-six.png"
         )
         self.QUOTE_LIBRARY = yaml_parser.yaml_load("quote_library.yaml")
+        self.QUOTABLE_AUTHORS = sorted([entry["name"] for entry in self.QUOTE_LIBRARY.values()])
 
     @commands.command(
         name="translate",
@@ -576,6 +577,21 @@ class Commands(commands.Cog, name="commands"):
         random_quote = quotes[random.randint(0, len(quotes) - 1)]
         return f"\"{random_quote}\"\n  - {self.QUOTE_LIBRARY[person_to_quote]['name']}"
 
+    def author_is_known(self, author):
+        """Checks if an author is catalogued in the quote library
+
+        Args:
+            author: String, author's name
+
+        Returns:
+            String, random quote if the author is known
+            String, empty if the author is unknown
+        """
+        for person_to_quote, entry in self.QUOTE_LIBRARY.items():  # for each known author
+            if author.lower() in entry["alias"]:  # alias match
+                return self.pick_quote_from_dict(person_to_quote)
+        return ""  # No matches
+
     @staticmethod
     async def pick_quote_from_history(ctx):  # 'ctx' is a discord.py construct
         messages = await ctx.message.channel.history(limit=200).flatten()
@@ -602,20 +618,28 @@ class Commands(commands.Cog, name="commands"):
 
         # Check for quotes in library, if args provided
         if len(args) > 1:
-            # Format author name (only accept 1 or 2 word names)
+            # Format author name to lower case
             # Try-catch not needed, since Discord message is parsed as String
-            if len(args) == 3:  # first & last name provided (alt: 'surprise me')
-                person_to_quote = args[1].lower() + args[2].lower()
-            else:
-                person_to_quote = args[1].lower()  # Greek philosophers are known by single names
+            person_to_quote = " ".join([word.lower() for word in args[1:]])
+
+            if person_to_quote == "list":  # List all known authors
+                await ctx.send(
+                    "**List of quotable authors:**\n> " +
+                    ", ".join(self.QUOTABLE_AUTHORS)
+                )
+                return  # short-circuit
 
             if person_to_quote in ("surpriseme", "surprise me"):  # give random quote in library
                 rand_author = random.choice(list(self.QUOTE_LIBRARY.keys()))
                 await ctx.send(self.pick_quote_from_dict(rand_author))
+                return  # short-circuit
+
+            # search for particular author
+            search_result = self.author_is_known(person_to_quote)
+            if search_result:  # If not found, search_result is falsy
+                await ctx.send(search_result)
                 return
-            elif person_to_quote in self.QUOTE_LIBRARY.keys():  # search for particular author
-                await ctx.send(self.pick_quote_from_dict(person_to_quote))
-                return
+
             else:  # catch-all
                 await ctx.send("I'm so sorry, but I'm afraid I do not know of any quotes from such a person. :pensive:")
                 return

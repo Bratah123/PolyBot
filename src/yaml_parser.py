@@ -4,6 +4,7 @@ Intentionally avoiding the use of classes in favour of top-level functions.
 See the parser docs here:
 https://yaml.readthedocs.io/en/latest/index.html
 """
+import os
 from ruamel.yaml import YAML
 
 
@@ -33,12 +34,37 @@ def yaml_load(filepath) -> "Reads the contents of a single-document YAML file":
         Generic error
     """
     try:
-        with open(filepath, "r") as file_data:
+        with open(filepath, "r", encoding="utf-8") as file_data:
             data = yaml.load(file_data)
+        return data
+
     # In case of OS error from invalid file/path
-    except Exception as e:
+    except FileNotFoundError:
+        # Check if the cwd is /PolyBot instead of /src
+        working_directory_path = os.getcwd()
+        working_directory = working_directory_path.split("\\")[-1]
+        if working_directory == "PolyBot":
+            return yaml_load("src/"+filepath)  # try again, with the right path
+
+        else:  # for other CWD, that is not /PolyBot and not /src
+            print(
+                "\n--------------------\n"
+                f"Error! The following file could not be found: {filepath}"
+            )
+
+            print(
+                "  [DEBUG] Current working directory: \n      " +
+                working_directory_path
+            )
+
+            print(
+                "  [DEBUG] List of files in the working directory: \n      " +
+                ", ".join(os.listdir()) + "\n--------------------\n"
+            )
+
+    except Exception as e:  # any other unexpected errors
         print(
-            "Error! The following exception was encountered while"
+            "\n--------------------\n"
+            "Error! The following exception was encountered while "
             f"trying to read a YAML file:\n  {e}"
         )
-    return data

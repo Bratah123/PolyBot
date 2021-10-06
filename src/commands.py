@@ -50,6 +50,7 @@ class Commands(commands.Cog, name="commands"):
             "https://cdn.discordapp.com/attachments/731528944402300977/801529992144093194/dice-six-faces-six.png"
         )
         self.QUOTE_LIBRARY = yaml_parser.yaml_load("quote_library.yaml")
+        self.QUOTABLE_AUTHORS = [entry["name"] for entry in self.QUOTE_LIBRARY.values()]
 
     @commands.command(
         name="translate",
@@ -609,11 +610,18 @@ class Commands(commands.Cog, name="commands"):
             else:
                 person_to_quote = args[1].lower()  # Greek philosophers are known by single names
 
+            if person_to_quote == "list":  # List all known authors
+                await ctx.send(
+                    "**List of quotable authors:**\n> " +
+                    ", ".join(self.QUOTABLE_AUTHORS)
+                )
+                return
+
             if person_to_quote in ("surpriseme", "surprise me"):  # give random quote in library
                 rand_author = random.choice(list(self.QUOTE_LIBRARY.keys()))
                 await ctx.send(self.pick_quote_from_dict(rand_author))
                 return
-            elif person_to_quote in self.QUOTE_LIBRARY.keys():  # search for particular author
+            elif person_to_quote in self.QUOTABLE_AUTHORS:  # search for particular author
                 await ctx.send(self.pick_quote_from_dict(person_to_quote))
                 return
             else:  # catch-all

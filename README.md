@@ -1,12 +1,15 @@
 # PolyBot
-Poly bot is a discord bot that provides all type of conversions (I.E. language, measurements, etc)
+PolyBot initially started as a simple Discord bot that provided conversions between many different data types (i.e. language, units of measurements, etc).  
 
-Poly bot aims to allow users in a discord server to convert any values into a desired type of measurement!
+We hope that with the help of Poly, users will be able to perform a myriad of actions whilst in Discord, without needing to reach for the web browser - be it converting between currencies like USD and CAD, finding the timestamp of an old Discord message from its snowflake ID, or more!  
 
-Hosted via AWS:
-[Invite the bot to your server!](https://discord.com/oauth2/authorize?client_id=619763426402631700&scope=bot&permissions=8&response_type=code)
+Over time, Poly has slowly grown to encompass a wide variety of functions. To see the full list of commands, issue `!help` to Poly.  
+You may also use the format `!help <command>` to see details for what a particular command does.  
 
-## Features
+Poly is hosted via AWS:
+[Click here to add the bot to your server now!](https://discord.com/oauth2/authorize?client_id=619763426402631700&scope=bot&permissions=8&response_type=code)
+
+## Features (non-exhaustive)
 - Currency Conversion
 - Hexadecimal Conversion
 - Binary Conversion
@@ -21,7 +24,7 @@ Hosted via AWS:
 
 ![help_command](https://cdn.discordapp.com/attachments/631249406775132182/799771101143498752/8fe54bc717cdd0cd489f164f149ac32f.png)
 
-## Set-up For Testing
+## Set-up For Testing & Developing
 Windows:  
 1. Install Python 3.6+
 2. Run `setup.bat`

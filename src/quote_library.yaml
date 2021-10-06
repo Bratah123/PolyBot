@@ -1,6 +1,13 @@
 ---
+# This layer is just for developer reference
 suntzu:
-  name: "Sun Tzu"
+  name: "Sun Tzu"  # Name is to be formatted, and ready to display to the user
+  alias:  # Use lower-case only - algorithm checks user input against this list
+    # List all common permutations of the name
+    - "sun tzu"
+    - "sun zi"
+    - "suntzu"
+    - "sunzi"
   quotes:
     - "Appear weak when you are strong, and strong when you are weak"
     - "Can you imagine what I would do if I could do all I can?"
@@ -80,6 +87,9 @@ suntzu:
 
 alberteinstein:
   name: "Albert Einstein"
+  alias:
+    - "albert einstein"
+    - "einstein"
   quotes:
     - "Genius is 1% talent and 99% hard work"
     - "I must be willing to give up what I am in order to become what I will be"
@@ -184,6 +194,14 @@ alberteinstein:
 
 saintexupery:
   name: "Antoine de Saint-Exup\u00E9ry"
+  alias:
+    - "antoine de saint-exup\u00E9ry"
+    - "de saint-exup\u00E9ry"
+    - "antoine de saint-exupery"
+    - "antoine de saint exupery"
+    - "de saint-exupery"
+    - "saint-exupery"
+    - "saint exupery"
   quotes:
     - "And now here is my secret, a very simple secret: It is only with the heart that one can see rightly; what is essential is invisible to the eye."
     - "All grown-ups were once children... but only few of them remember it."
@@ -201,6 +219,9 @@ saintexupery:
 
 johngreen:
   name: "John Green"
+  alias:
+    - "john michael green"
+    - "john green"
   quotes:
     - "As he read, I fell in love the way you fall asleep: slowly, and then all at once."
     - "You don't get to choose if you get hurt in this world... But you do have some say in who hurts you. I like my choices."
@@ -214,7 +235,7 @@ johngreen:
     - "What a treacherous thing to believe that a person is more than a person."
     - "Maybe our favorite quotations say more about us than about the stories and people we're quoting."
     - "Imagining the future is a kind of nostalgia. (...) You spend your whole life stuck in the labyrinth, thinking about how you'll escape it one day, and how awesome it will be, and imagining that future keeps you going, but you never do it. You just use the future to escape the present."
-    - "That's always seemed so ridiculous to me, that people want to be around someone because they're pretty. It's like picking your breakfeast cereals based on color instead of taste."
+    - "That's always seemed so ridiculous to me, that people want to be around someone because they're pretty. It's like picking your breakfast cereals based on color instead of taste."
     - "It is so hard to leave-until you leave. And then it is the easiest goddamned thing in the world."
     - "Some tourists think Amsterdam is a city of sin, but in truth it is a city of freedom. And in freedom, most people find sin."
     - "I may die young, but at least I'll die smart."
@@ -233,7 +254,7 @@ johngreen:
     - "It is easy to forget how full the world is of people, full to bursting, and each of them imaginable and consistently misimagined."
     - "I just did some calculations and I've been able to determine that you're full of shit."
     - "There is no shortage of fault to be found amid our stars."
-    - "We need never be hopeless because we can never be irreperably broken."
+    - "We need never be hopeless because we can never be irreparably broken."
     - "I try to live life so that I can live with myself."
     - "As much as life can suck, it always beats the alternative."
     - "There's some people in this world who you can just love and love and love no matter what."
@@ -255,6 +276,10 @@ johngreen:
 
 nelsonmandela:
   name: "Nelson Mandela"
+  alias:
+    - "mandela"
+    - "nelson mandela"
+    - "nelson rolihlahla mandela"
   quotes:
     - "Real leaders must be ready to sacrifice all for the freedom of their people."
     - "A fundamental concern for others in our individual and community lives would go a long way in making the world the better place we so passionately dreamt of."
@@ -273,6 +298,11 @@ nelsonmandela:
 
 stevejobs:
   name: "Steve Jobs"
+  alias:
+    - "steve jobs"
+    - "jobs"
+    - "steven paul jobs"
+    - "steve apple"
   quotes:
     - "Don't let the noise of others' opinions drown out your own inner voice."
     - "Have the courage to follow your heart and intuition. They somehow already know what you truly want to become. Everything else is secondary."
@@ -292,6 +322,10 @@ stevejobs:
 
 stevewozniak:
   name: "Steve Wozniak"
+  alias:
+    - "steve wozniak"
+    - "stephen gary wozniak"
+    - "woz"
   quotes:
     - "If you love what you do and are willing to do what it takes, it's within your reach. And it'll be worth every minute you spend alone at night, thinking and thinking about what it is you want to design or build. It'll be worth it, I promise."
     - "Never trust a computer you can't throw out a window."
@@ -319,6 +353,10 @@ stevewozniak:
 
 briankernighan:
   name: "Brian Kernighan"
+  alias:
+    - "brian kernighan"
+    - "kernighan"
+    - "brian wilson kernighan"
   quotes:
     - "Everyone knows that debugging is twice as hard as writing a program in the first place. So if you're as clever as you can be when you write it, how will you ever debug it?"
     - "Don't comment bad code-rewrite it."
@@ -334,6 +372,9 @@ briankernighan:
 
 kenthompson:
   name: "Ken Thompson"
+  alias:
+    - "ken thompson"
+    - "kenneth lane thompson"
   quotes:
     - "When in doubt, use brute force."
     - "You can't trust code that you did not totally create yourself."
@@ -353,6 +394,9 @@ kenthompson:
 
 dennisritchie:
   name: "Dennis Ritchie"
+  alias:
+    - "dennis ritchie"
+    - "dennis macalistair ritchie"
   quotes:
     - "[C has] the power of assembly language and the convenience of ... assembly language. "
     - "UNIX is very simple, it just needs a genius to understand its simplicity."
@@ -369,6 +413,10 @@ dennisritchie:
 
 eleanorroosevelt:
   name: "Eleanor Roosevelt"
+  alias:
+    - "eleanor roosevelt"
+    - "anna eleanor roosevelt"
+    - "fdr wife"
   quotes:
     - "A woman is like a tea bag; you never know how strong it is until it's in hot water."
     - "Do one thing every day that scares you."
@@ -399,6 +447,12 @@ eleanorroosevelt:
 
 franklinroosevelt:
   name: "Franklin D. Roosevelt"
+  alias:
+    - "franklin d. roosevelt"
+    - "franklin d roosevelt"
+    - "franklin roosevelt"
+    - "franklin delano roosevelt"
+    - "fdr"
   quotes:
     - "The only thing we have to fear is fear itself."
     - "Remember, remember always, that all of us, and you and I especially, are descended from immigrants and revolutionists."
@@ -442,7 +496,13 @@ franklinroosevelt:
     - "It is an unfortunate human failing that a full pocketbook often groans more loudly than an empty stomach."
 
 theodoreroosevelt:
-  name: "Theodore Roosevelt Jr."
+  name: "Theodore Roosevelt"
+  alias:
+    - "theodore roosevelt"
+    - "teddy roosevelt"
+    - "teddy"
+    - "t. r."
+    - "t.r."
   quotes:
     - "Do what you can, with what you have, where you are."
     - "It is hard to fail, but it is worse never to have tried to succeed."
@@ -469,6 +529,11 @@ theodoreroosevelt:
 
 winstonchurchill:
   name: "Winston Churchill"
+  alias:
+    - "winston churchill"
+    - "churchill"
+    - "sir winston leonard spencer churchill"
+    - "sir winston churchill"
   quotes:
     - "It is a good thing for an uneducated man to read books of quotations."
     - "There are a terrible lot of lies going about the world, and the worst of it is that half of them are true."
@@ -515,6 +580,9 @@ winstonchurchill:
 
 aristotle:
   name: "Aristotle"
+  alias:
+    - "aristotle"
+    - "aristoteles"
   quotes:
     - "We are what we repeatedly do. Excellence, then, is not an act, but a habit."
     - "The whole is more than the sum of its parts."
@@ -548,6 +616,9 @@ aristotle:
 
 annefrank:
   name: "Anne Frank"
+  alias:
+    - "anne frank"
+    - "annelies marie frank"
   quotes:
     - "I keep my ideals, because in spite of everything I still believe that people are really good at heart."
     - "How wonderful it is that nobody need wait a single moment before starting to improve the world."

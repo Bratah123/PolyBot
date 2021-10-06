@@ -50,7 +50,7 @@ class Commands(commands.Cog, name="commands"):
             "https://cdn.discordapp.com/attachments/731528944402300977/801529992144093194/dice-six-faces-six.png"
         )
         self.QUOTE_LIBRARY = yaml_parser.yaml_load("quote_library.yaml")
-        self.QUOTABLE_AUTHORS = [entry["name"] for entry in self.QUOTE_LIBRARY.values()]
+        self.QUOTABLE_AUTHORS = sorted([entry["name"] for entry in self.QUOTE_LIBRARY.values()])
 
     @commands.command(
         name="translate",

@@ -61,7 +61,7 @@ async def help_command(ctx):
     )
 
     embed_msg.add_field(name="User Commands", value=cmd_list_str, inline=False)
-    embed_msg.add_field(name="Additioanl Options", value=detailed, inline=False)
+    embed_msg.add_field(name="Additional Options", value=detailed, inline=False)
     embed_msg.set_footer(text="PolyBot")
 
     await ctx.send(embed=embed_msg)
@@ -86,5 +86,5 @@ async def credit_command(ctx):
 
 
 if __name__ == '__main__':
-    print("Loading Bot..")
+    print("Loading Bot...")
     bot.run("TOKEN HERE")

@@ -17,7 +17,7 @@ print(f"\nNow attempting to catch any non-ASCII quotes in {FILE_TO_CHECK}...")
 for person in QUOTE_LIBRARY.values():
 	for quote in person.get("quotes"):
 		if not quote.isascii():
-			print(f"  Found non-ASCII by {person}:\n  {quote}")
+			print(f"  Found non-ASCII by {person.get('name')}:\n  {quote}")
 
 
 print("\nCatch sequence completed!")

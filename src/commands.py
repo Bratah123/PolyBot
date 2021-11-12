@@ -575,7 +575,11 @@ class Commands(commands.Cog, name="commands"):
     def pick_quote_from_dict(self, person_to_quote):
         quotes = self.QUOTE_LIBRARY[person_to_quote]["quotes"]
         random_quote = quotes[random.randint(0, len(quotes) - 1)]
-        return f"\"{random_quote}\"\n  - {self.QUOTE_LIBRARY[person_to_quote]['name']}"
+        # split quote by line breaks (for multi-line quotes) and wrap in quote-block
+        temp = random_quote.split("\n")
+        temp = ["> " + line for line in temp]
+        random_quote = "\n".join(temp)
+        return f"{random_quote}\n  - {self.QUOTE_LIBRARY[person_to_quote]['name']}"
 
     def author_is_known(self, author):
         """Checks if an author is catalogued in the quote library
@@ -629,7 +633,9 @@ class Commands(commands.Cog, name="commands"):
                 )
                 return  # short-circuit
 
-            if person_to_quote in ("surpriseme", "surprise me"):  # give random quote in library
+            if person_to_quote in (
+                    "surprise", "surpriseme", "surprise me", "random", "any"
+            ):  # give random quote in library
                 rand_author = random.choice(list(self.QUOTE_LIBRARY.keys()))
                 await ctx.send(self.pick_quote_from_dict(rand_author))
                 return  # short-circuit

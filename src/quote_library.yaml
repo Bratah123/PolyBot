@@ -1252,3 +1252,45 @@ vonneumann:
     - "I am thinking about something much more important than bombs. I am thinking about computers."
     - "There is no point in being precise if you do not even know what you are talking about."
 
+kuwajima:
+  name: "Jigoro Kuwajima"
+  alias:
+    - "jigoro kuwajima"
+    - "zenitsu's grandpa"
+    - "zenitsu grandpa"
+  quotes:
+    - "It's all right to cry.\nIt's all right to run away.\nJust don't ever give up!"
+    - "You endured all that hellish training.\nYou'll be rewarded for that without fail!\nHone it to the utmost limit!"
+    - "Become the most durable blade of all!\nHone that one thing to perfection!"
+
+tanjiro:
+  name: "Tanjiro Kamado"
+  alias:
+    - "tanjiro kamado"
+    - "tanjiro"
+  quotes:
+    - "No matter how many people you may lose, you have no choice but to go on living. No matter how devastating the blows may be."
+    - "Hard work is the sum of daily efforts. It can be one step at a time. Move forward!"
+    - "It's the heart that drives people."
+    - "I can do it I know I can do it. I'm the guy who gets it done broken bones or not... No matter what... I can do it!"
+    - "Look straight ahead. Rouse yourself! Give it all you've got Tanjiro! Give it all you've got!"
+
+zenitsu:
+  name: "Zenitsu Agatsuma"
+  alias:
+    - "zenitsu agatsuma"
+    - "zenitsu"
+  quotes:
+    - "If you can only do one thing, hone it to perfection.\nHone it to the utmost limit!"
+    - "Don't ever give up. Even if it's painful, even if it's agonizing, don't try to take the easy way out."
+    - "I won the battle, but lost the war."
+
+shirouemiya:
+  name: "Shirou Emiya"
+  alias:
+    - "shirou emiya"
+  quotes:
+    - "People die when they are killed."
+    - "There is no rule that says an imitation cannot defeat the original."
+    - "I don't mind losing to someone, but I won't be beaten by myself."
+    - "Just because you're correct doesn't mean you're right"

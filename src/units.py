@@ -149,7 +149,7 @@ def weight_imperial_si(unit_from, unit_to, source_value):
     return f"{source_value}*{unit_from}* = {output:.2f}*{unit_to}* (2dp)"
 
 
-def liquid_imperial_si(unit_from, unit_to, source_value):
+def liquid_si_imperial(unit_from, unit_to, source_value):
     # do conversions as ml-oz
     source_in_ml = to_ml(source_value, unit_from)
     source_in_oz = source_in_ml / 29.57
@@ -164,7 +164,7 @@ def liquid_imperial_si(unit_from, unit_to, source_value):
     return f"{source_value}*{unit_from}* = {output:.2f}*{unit_to}* (2dp)"
 
 
-def liquid_si_imperial(unit_from, unit_to, source_value):
+def liquid_imperial_si(unit_from, unit_to, source_value):
     # do conversions as oz-ml
     source_in_oz = to_oz(source_value, unit_from)
     source_in_ml = source_in_oz * 29.57

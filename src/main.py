@@ -1,7 +1,16 @@
 import discord
 from discord.ext import commands
 
-bot = commands.Bot(command_prefix='!')
+bot = commands.Bot(
+    command_prefix='!',
+    # Set Poly to never ping:
+    allowed_mentions = discord.AllowedMentions(
+        users = False,  # Whether to ping individual user @mentions
+        everyone = False,  # Whether to ping @everyone or @here mentions
+        roles = False,  # Whether to ping role @mentions
+        replied_user = False,  # Whether to ping on replies to messages
+        ),
+)
 
 print("Loading all commands...")
 

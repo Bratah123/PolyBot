@@ -6,8 +6,7 @@ We hope that with the help of Poly, users will be able to perform a myriad of ac
 Over time, Poly has slowly grown to encompass a wide variety of functions. To see the full list of commands, issue `!help` to Poly.  
 You may also use the format `!help <command>` to see details for what a particular command does.  
 
-Poly is hosted via AWS:
-[Click here to add the bot to your server now!](https://discord.com/oauth2/authorize?client_id=619763426402631700&scope=bot&permissions=8&response_type=code)
+~~Poly is hosted via AWS: Click here to add the bot to your server now!
 
 ## Features (non-exhaustive)
 - Currency Conversion
